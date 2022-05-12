@@ -1,0 +1,80 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="Button">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5"></Setter>
+            </Style>
+        </Style.Resources>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF41DDFF" Offset="0"/>
+                    <GradientStop Color="#FF26BDC7" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="Foreground" Value="#003C83"></Setter>
+        <Setter Property="FontWeight" Value="Medium"></Setter>
+        <Setter Property="Padding" Value="5"></Setter>
+        <Setter Property="Width" Value="200"></Setter>
+        <Setter Property="Height" Value="37"></Setter>
+        <Setter Property="Margin" Value="10"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+
+    <!-- Кнопка посмотреть пароль -->
+    <Style x:Key="btnSeePassword" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Кнопка в меню -->
+    <Style x:Key="BtnInMenu" TargetType="Button">
+        <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+        <Setter Property="Background" Value="#98E6FF"></Setter>
+        <Setter Property="Padding" Value="30,5,5,5"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+
+    <!-- Текст в меню (кнопка) -->
+    <Style x:Key="TextInBtnMenu" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="Foreground" Value="#003C83"></Setter>
+        <Setter Property="FontWeight" Value="Medium"></Setter>
+        <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+
+    <!-- Кнопка на панели управления -->
+    <Style x:Key="BtnTaskBar" TargetType="Button">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5"></Setter>
+            </Style>
+        </Style.Resources>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="Foreground" Value="#003C83"></Setter>
+    </Style>
+</ResourceDictionary>

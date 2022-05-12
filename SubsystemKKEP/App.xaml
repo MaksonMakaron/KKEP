@@ -1,0 +1,73 @@
+﻿<Application x:Class="SubsystemKKEP.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SubsystemKKEP"
+             StartupUri="AppWindows/Authorization.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/StylesDatePicker.xaml" />
+                <ResourceDictionary Source="Styles/StylesComboBox.xaml" />
+                <ResourceDictionary Source="Styles/StylesRadioButton.xaml" />
+                <ResourceDictionary Source="Styles/StylesCheckBox.xaml" />
+                <ResourceDictionary Source="Styles/StylesButton.xaml" />
+                <ResourceDictionary Source="Styles/StylesDataGrid.xaml" />
+                <ResourceDictionary Source="Styles/StylesPasswordBoxAndTextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Grid -->
+            <Style x:Key="MainGrid" TargetType="Grid">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="1,2" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF7100A7"/>
+                            <GradientStop Color="#FF005ED2" Offset="1"/>
+                            <GradientStop Color="#FF2C2387" Offset="0.51"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <!-- Все изображения -->
+            <Style TargetType="Image">
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"></Setter>
+            </Style>
+
+            <!-- TextBlock (текст) -->
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+                <Setter Property="Foreground" Value="#003C83"></Setter>
+                <Setter Property="FontSize" Value="16"></Setter>
+                <Setter Property="FontWeight" Value="Medium"></Setter>
+            </Style>
+            
+            <!-- Иконки -->
+            <Style x:Key="IconButton">
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"></Setter>
+                <Setter Property="ItemsControl.Width" Value="30"></Setter>
+            </Style>
+
+            <!-- Основной блок в окне -->
+            <Style x:Key="MainBlockInWindow" TargetType="Border">
+                <Setter Property="Background" Value="#ADEBFF"></Setter>
+                <Setter Property="CornerRadius" Value="20"></Setter>
+            </Style>
+
+            <!-- Заголовок на странице -->
+            <Style x:Key="HeaderText" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+                <Setter Property="Foreground" Value="#003C83"></Setter>
+                <Setter Property="FontSize" Value="50"></Setter>
+                <Setter Property="FontWeight" Value="Medium"></Setter>
+            </Style>
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

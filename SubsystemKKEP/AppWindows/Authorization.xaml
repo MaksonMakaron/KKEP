@@ -1,0 +1,109 @@
+﻿<Window x:Class="SubsystemKKEP.AppWindows.Authorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SubsystemKKEP.AppWindows"
+        mc:Ignorable="d"
+        Title="Авторизация" 
+        x:Name="authorizationWindow"
+        Height="500" MinHeight="600"
+        Width="467.6" MinWidth="600"
+        WindowState="Maximized" 
+        WindowStartupLocation="CenterScreen">
+    <Grid Style="{StaticResource MainGrid}">
+        <Border Background="White"
+                Margin="50"
+                MaxWidth="700"
+                CornerRadius="15">
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Image Source="/SubsystemKKEP;component/Resources/logo.png" 
+                       MinHeight="190" Height="190" MaxHeight="600"
+                       MinWidth="226" Width="226" MaxWidth="600"/>
+                <TextBlock Text="Вход в систему" 
+                           FontSize="26" 
+                           Margin="10"
+                           FontWeight="Bold" 
+                           TextAlignment="Center"
+                           ></TextBlock>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="Логин:" 
+                               Margin="0,0,5,0"
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"></TextBlock>
+                    <Border Background="White"
+                        BorderThickness="0.5"
+                        BorderBrush="#FFABADB3"
+                        CornerRadius="5"
+                        Padding="3,1"
+                        Margin="10">
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <TextBox x:Name="TbLogin"
+                                     MaxLength="20"
+                                     Margin="0" 
+                                     TabIndex="1">
+                            </TextBox>
+                            <Image Source="/SubsystemKKEP;component/Resources/User.png"
+                               Style="{StaticResource IconButton}"></Image>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Пароль:"
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"></TextBlock>
+                    <Border Background="White"
+                        BorderThickness="0.5"
+                        BorderBrush="#FFABADB3"
+                        CornerRadius="5"
+                        Padding="3,1"
+                        Margin="10">
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <Grid Background="Transparent">
+                                <TextBox x:Name="TbPassword"
+                                     MaxLength="20"
+                                     Margin="0"></TextBox>
+                                <PasswordBox x:Name="PbPassword"
+                                         MaxLength="20" TabIndex="2"/>
+                            </Grid>
+                            <Button x:Name="BtnSeePassword"
+                                Cursor="Hand"
+                                PreviewMouseDown="BtnSeePassword_PreviewMouseDown"
+                                PreviewMouseUp="BtnSeePassword_PreviewMouseUp"
+                                Style="{StaticResource btnSeePassword}" TabIndex="3">
+                                <Button.Content>
+                                    <Image Source="/SubsystemKKEP;component/Resources/Eye.png"
+                                       Style="{StaticResource IconButton}"></Image>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                
+                <Button x:Name="BtnSignIn" Click="BtnSignIn_Click" TabIndex="4">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Image Source="/SubsystemKKEP;component/Resources/SignIn.png"
+                                   Style="{StaticResource IconButton}"></Image>
+                            <TextBlock Text="Войти"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource TextInBtnMenu}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
