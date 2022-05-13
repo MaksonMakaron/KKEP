@@ -56,11 +56,11 @@
                           MinHeight="500">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="110"
-                                            Binding="{Binding Group.NameGroup}">
+                                            Binding="{Binding Group.GroupName}">
                             <DataGridTextColumn.Header>Группа</DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn Width="*"
-                                            Binding="{Binding Discipline.NameDiscipline}">
+                                            Binding="{Binding Discipline.DisciplineName}">
                             <DataGridTextColumn.Header>Дисциплина</DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTemplateColumn Width="30">

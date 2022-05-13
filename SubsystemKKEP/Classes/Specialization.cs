@@ -21,7 +21,7 @@ namespace SubsystemKKEP.Classes
         }
     
         public int Id { get; set; }
-        public string NameOfSpecialization { get; set; }
+        public string SpecializationOfName { get; set; }
         public string ShortName { get; set; }
         public int IdDepartment { get; set; }
     

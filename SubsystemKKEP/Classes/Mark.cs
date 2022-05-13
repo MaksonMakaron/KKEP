@@ -14,23 +14,15 @@ namespace SubsystemKKEP.Classes
     
     public partial class Mark
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Mark()
-        {
-            this.Students = new HashSet<Student>();
-        }
-    
         public int Id { get; set; }
-        public string Mark1 { get; set; }
+        public string MarkValue { get; set; }
         public System.DateTime Date { get; set; }
         public int IdDiscipline { get; set; }
-        public int IdTeacher { get; set; }
-        public int IdTeachingJournal { get; set; }
+        public int IdUser { get; set; }
+        public int IdStudent { get; set; }
     
         public virtual Discipline Discipline { get; set; }
-        public virtual Teacher Teacher { get; set; }
-        public virtual TeachingJournal TeachingJournal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual User User { get; set; }
     }
 }

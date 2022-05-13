@@ -142,7 +142,7 @@ namespace SubsystemKKEP.AppWindows
                 if (login == users[i].Login && password == users[i].Password)
                 {
                     authorization = true;
-                    switch (users[i].Role.NameRole)
+                    switch (users[i].Role.RoleName)
                     {
                         case "Администратор":
                             OpenAdministratorWindow(users[i]);

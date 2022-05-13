@@ -27,8 +27,14 @@ namespace SubsystemKKEP.AppPages.Teacher
         public TeachingJournals()
         {
             InitializeComponent();
-            DGridDisciplines.ItemsSource = App.DataBase.TeacherDisciplineGroups.
-                Where(p => p.Teacher.IdUser == InterfaceManagement.ManagementUser.Id).ToList();
+            DGridDisciplines.ItemsSource = App.DataBase.Appointments.
+                Where(p => p.User.Id == InterfaceManagement.ManagementUser.Id).ToList();
+            if (DGridDisciplines.Items.Count == 0)
+            {
+                MessageBox.Show($"У вас нет дисциплин. Обратитесть к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DGridDisciplines.IsEnabled = false;
+                TbSearch.IsEnabled = false;
+            }
         }
 
         /// <summary>
@@ -38,18 +44,17 @@ namespace SubsystemKKEP.AppPages.Teacher
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var disciplines = App.DataBase.TeacherDisciplineGroups.
-                Where(p => p.Teacher.IdUser == InterfaceManagement.ManagementUser.Id).ToList();
+            var disciplines = App.DataBase.Appointments.Where(p => p.User.Id == InterfaceManagement.ManagementUser.Id).ToList();
 
-            disciplines = disciplines.Where(p => p.Group.NameGroup.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
+            disciplines = disciplines.Where(p => p.Group.GroupName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
 
             DGridDisciplines.ItemsSource = disciplines;
         }
 
         private void BtnOpen_Click(object sender, RoutedEventArgs e)
         {
-            var selectedJournal = (sender as Button).DataContext as TeacherDisciplineGroup;
-            InterfaceManagement.ManagementHeaderText.Text = selectedJournal.Group.NameGroup;
+            var selectedJournal = (sender as Button).DataContext as Appointment;
+            InterfaceManagement.ManagementHeaderText.Text = selectedJournal.Group.GroupName;
             InterfaceManagement.ManagementPage.Navigate(new GroupJournal(selectedJournal));
         }
     }

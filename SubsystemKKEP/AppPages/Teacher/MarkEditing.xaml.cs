@@ -23,7 +23,7 @@ namespace SubsystemKKEP.AppPages.Teacher
     {
         private Mark markCurrent = new Mark();
 
-        public MarkEditing(Mark mark)
+        public MarkEditing(Mark mark, Appointment journalCurrent)
         {
             InitializeComponent();
             CmbMark.ItemsSource = GenerationMarks();
@@ -31,9 +31,11 @@ namespace SubsystemKKEP.AppPages.Teacher
             {
                 markCurrent = mark;
             }
+            var students = App.DataBase.Students.Where(p => p.Groups.Select(q => q.Id).Contains(journalCurrent.IdGroup)).ToList();
+            CmbStudent.ItemsSource = students;
             DataContext = markCurrent;
-
-            //CmbStudent.ItemsSource =
+            DpDateMark.SelectedDate = DateTime.Now;
+            //MessageBox.Show(mark.Student.FullName);
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -74,7 +76,6 @@ namespace SubsystemKKEP.AppPages.Teacher
                 if (markCurrent.Id == 0)
                 {
                     App.DataBase.Marks.Add(markCurrent);
-                    
                 }
 
                 try
@@ -87,10 +88,9 @@ namespace SubsystemKKEP.AppPages.Teacher
                     MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
-                MessageBox.Show($"Информация сохранена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 CmbStudent.SelectedIndex = -1;
                 CmbMark.SelectedIndex = -1;
-                DpDateMark.SelectedDate = null;
+                DpDateMark.SelectedDate = DateTime.Now;
             }
             else
             {

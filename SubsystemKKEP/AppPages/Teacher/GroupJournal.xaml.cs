@@ -21,47 +21,20 @@ namespace SubsystemKKEP.AppPages.Teacher
     /// </summary>
     public partial class GroupJournal : Page
     {
-        private TeacherDisciplineGroup journalCurrent = new TeacherDisciplineGroup();
+        private static Appointment journalCurrent = new Appointment();
 
-        public GroupJournal(TeacherDisciplineGroup selectedJournal)
+        public GroupJournal(Appointment selectedJournal)
         {
             InitializeComponent();
-            TextTeacher.Text = $"Преподаватель: {selectedJournal.Teacher.User.UserName}";
-            // DGridMarks.ItemsSource = ;
+            TextTeacher.Text = $"Преподаватель: {selectedJournal.User.UserName}";
             journalCurrent = selectedJournal;
-
-            var students = App.DataBase.Students.Where(p => journalCurrent.IdGroup == p.Groups.FirstOrDefault().Id).ToList();
-
-            List<Student> student1 = new List<Student>();
-            
-            //var studentsMarks = App.DataBase.Marks.Where(p => p.IdDiscipline == journalCurrent.IdDiscipline && journalCurrent.IdGroup == p.TeachingJournal.IdGroup).ToList();
-            
-
-            foreach (var student in students)
+            UpdateMarks();
+            if (DGridMarks.Items.Count == 0)
             {
-                foreach (var mark in student.Marks.Where(p => p.IdDiscipline == journalCurrent.IdDiscipline))
-                {
-                    var currentStudent = new Student()
-                    {
-                        FirstName = student.FirstName,
-                        LastName = student.LastName,
-                        Marks = new List<Mark>()
-
-                    };
-                    currentStudent.Marks.Add(mark);
-                    student1.Add(currentStudent);
-                }
+                MessageBox.Show($"Отсутсвуют оценки", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DGridMarks.IsEnabled = false;
+                TbSearch.IsEnabled = false;
             }
-            
-            DGridMarks.ItemsSource = student1;
-            //DGridMarks.ItemsSource = App.DataBase.Marks.Where(p => p.IdDiscipline == journalCurrent.IdDiscipline && journalCurrent.IdGroup == p.TeachingJournal.IdGroup).ToList();
-
-
-
-            //DGridMarks.ItemsSource = App.DataBase.Mark.
-            //   Where(p => p.IdTeacher == selectedJournal.IdTeacher &&
-            //   p.IdDiscipline == selectedJournal.IdDiscipline).ToList();
-
         }
 
         /// <summary>
@@ -74,6 +47,18 @@ namespace SubsystemKKEP.AppPages.Teacher
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        private void UpdateMarks()
+        {
+            var currentMarks = App.DataBase.Marks.
+                Where(p => p.IdDiscipline == journalCurrent.IdDiscipline).ToList();
+
+            currentMarks = currentMarks.Where(p => p.Student.Groups.Contains(journalCurrent.Group)).ToList();
+
+            currentMarks = currentMarks.Where(p => p.Student.FullName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
+
+            DGridMarks.ItemsSource = currentMarks;
+        }
+
         /// <summary>
         /// При изменении текста происходит поиск
         /// </summary>
@@ -81,7 +66,7 @@ namespace SubsystemKKEP.AppPages.Teacher
         /// <param name="e"></param>
         private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            UpdateMarks();
         }
 
         /// <summary>
@@ -91,7 +76,7 @@ namespace SubsystemKKEP.AppPages.Teacher
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnAddMark_Click(object sender, RoutedEventArgs e)
         {
-            InterfaceManagement.ManagementPage.Navigate(new MarkEditing(null));
+            InterfaceManagement.ManagementPage.Navigate(new MarkEditing(null, journalCurrent));
         }
         
         /// <summary>
@@ -112,8 +97,7 @@ namespace SubsystemKKEP.AppPages.Teacher
                     App.DataBase.Marks.RemoveRange(marksRemoving);
                     App.DataBase.SaveChanges();
                     MessageBox.Show($"Информация удалена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-                    DGridMarks.ItemsSource = App.DataBase.Marks.
-                           Where(p => p.IdDiscipline == journalCurrent.IdDiscipline && journalCurrent.IdGroup == p.TeachingJournal.IdGroup).ToList();
+                    UpdateMarks();
                 }
                 catch (Exception ex)
                 {
@@ -129,7 +113,7 @@ namespace SubsystemKKEP.AppPages.Teacher
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnEditMark_Click(object sender, RoutedEventArgs e)
         {
-            InterfaceManagement.ManagementPage.Navigate(new MarkEditing((sender as Button).DataContext as Mark));
+            InterfaceManagement.ManagementPage.Navigate(new MarkEditing((sender as Button).DataContext as Mark, journalCurrent));
         }
 
         /// <summary>
@@ -141,7 +125,7 @@ namespace SubsystemKKEP.AppPages.Teacher
         {
             if (Visibility == Visibility.Visible)
             {
-                //DGridMarks.ItemsSource = App.DataBase.Marks.Where(p => p.IdDiscipline == journalCurrent.IdDiscipline && journalCurrent.IdGroup == p.TeachingJournal.IdGroup).ToList();
+                UpdateMarks();
             }
         }
     }

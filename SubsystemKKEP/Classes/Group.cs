@@ -17,22 +17,19 @@ namespace SubsystemKKEP.Classes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Group()
         {
-            this.TeacherDisciplineGroups = new HashSet<TeacherDisciplineGroup>();
-            this.TeachingJournals = new HashSet<TeachingJournal>();
+            this.Appointments = new HashSet<Appointment>();
             this.Students = new HashSet<Student>();
         }
     
         public int Id { get; set; }
-        public string NameGroup { get; set; }
-        public string NumberGroup { get; set; }
+        public string GroupName { get; set; }
+        public string GroupNumber { get; set; }
         public string CourseOfStudy { get; set; }
         public int IdSpecialization { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual Specialization Specialization { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherDisciplineGroup> TeacherDisciplineGroups { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeachingJournal> TeachingJournals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
     }

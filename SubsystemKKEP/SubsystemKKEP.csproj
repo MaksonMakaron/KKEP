@@ -138,6 +138,9 @@
     <Compile Include="AppWindows\TeacherWindow.xaml.cs">
       <DependentUpon>TeacherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Appointment.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Classes\BaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,15 +183,6 @@
     </Compile>
     <Compile Include="Classes\StudentPartial.cs" />
     <Compile Include="Classes\sysdiagram.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\Teacher.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\TeacherDisciplineGroup.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\TeachingJournal.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\User.cs">
@@ -357,16 +351,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Classes\BaseModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Classes\BaseModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-      <LastGenOutput>BaseModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\Info.png" />
     <Resource Include="Resources\Disciplines.png" />
     <Resource Include="Resources\Add.png" />
@@ -395,6 +379,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppPages\Department\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Classes\BaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Classes\BaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

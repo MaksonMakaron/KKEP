@@ -40,7 +40,8 @@
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Center"></TextBlock>
                     <ComboBox x:Name="CmbStudent"
-                              SelectedItem="{Binding FullName}"
+                              SelectedItem="{Binding Student}"
+                              DisplayMemberPath="FullName"
                               Margin="0 15"
                               Width="350"></ComboBox>
                 </StackPanel>
@@ -55,7 +56,7 @@
                                    VerticalAlignment="Center" 
                                    HorizontalAlignment="Center"></TextBlock>
                         <ComboBox x:Name="CmbMark"
-                                  SelectedItem="{Binding Mark1}"
+                                  SelectedItem="{Binding MarkValue}"
                                   Width="60"
                                   Margin="0 15"></ComboBox>
                     </StackPanel>

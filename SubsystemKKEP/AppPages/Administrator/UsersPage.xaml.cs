@@ -27,7 +27,7 @@ namespace SubsystemKKEP.AppPages.Administrator
             var allRoles = App.DataBase.Roles.ToList();
             allRoles.Insert(0, new Role
             {
-                NameRole = "Все пользователи"
+                RoleName = "Все пользователи"
             });
             CmbSortRole.ItemsSource = allRoles;
             CmbSortRole.SelectedIndex = 0;
@@ -40,7 +40,7 @@ namespace SubsystemKKEP.AppPages.Administrator
             var currentUsers = App.DataBase.Users.ToList();
             if (CmbSortRole.SelectedIndex > 0)
             {
-                currentUsers = currentUsers.Where(p => p.Role.NameRole == (CmbSortRole.SelectedItem as Role).NameRole).ToList();
+                currentUsers = currentUsers.Where(p => p.Role.RoleName == (CmbSortRole.SelectedItem as Role).RoleName).ToList();
             }
 
             currentUsers = currentUsers.Where(p => p.UserName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();

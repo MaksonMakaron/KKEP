@@ -17,9 +17,10 @@ namespace SubsystemKKEP.Classes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Appointments = new HashSet<Appointment>();
             this.Departments = new HashSet<Department>();
             this.LogIns = new HashSet<LogIn>();
-            this.Teachers = new HashSet<Teacher>();
+            this.Marks = new HashSet<Mark>();
         }
     
         public int Id { get; set; }
@@ -29,11 +30,13 @@ namespace SubsystemKKEP.Classes
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appointment> Appointments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LogIn> LogIns { get; set; }
-        public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

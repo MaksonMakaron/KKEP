@@ -13,7 +13,8 @@ namespace SubsystemKKEP.Classes
             get
             {
                 return $"{LastName} {FirstName} {Patronymic}";
-            } 
+            }
+            set { }
         }
     }
 }

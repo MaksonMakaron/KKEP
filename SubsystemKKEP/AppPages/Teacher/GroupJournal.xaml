@@ -62,8 +62,8 @@
                             Margin="10"
                             ToolTip="Поиск по ФИО">
                         <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
                             <TextBox x:Name="TbSearch"
                                      Margin="0"
                                      MaxLength="30"
@@ -85,23 +85,15 @@
                           AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="400"
-                                            Binding="{Binding Path=FullName}">
+                                            Binding="{Binding Student.FullName}">
                             <DataGridTextColumn.Header>ФИО</DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn Width="200"
-                                            Binding="{Binding Marks.Date, StringFormat=dd.MM.yyyy}">
+                                            Binding="{Binding Date, StringFormat=dd.MM.yyyy}">
                             <DataGridTextColumn.Header>Дата</DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Mark1}"></TextBlock>
-                                    
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                         <DataGridTextColumn Width="70"
-                                            Binding="{Binding Mark1}">
+                                            Binding="{Binding MarkValue}">
                             <DataGridTextColumn.Header>Оценка</DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTemplateColumn Width="30">

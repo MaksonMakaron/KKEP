@@ -25,6 +25,7 @@ namespace SubsystemKKEP.Classes
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Discipline> Disciplines { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
@@ -34,9 +35,6 @@ namespace SubsystemKKEP.Classes
         public virtual DbSet<Specialization> Specializations { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Teacher> Teachers { get; set; }
-        public virtual DbSet<TeacherDisciplineGroup> TeacherDisciplineGroups { get; set; }
-        public virtual DbSet<TeachingJournal> TeachingJournals { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

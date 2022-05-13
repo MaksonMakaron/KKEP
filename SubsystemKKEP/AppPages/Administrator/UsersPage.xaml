@@ -79,7 +79,7 @@
                     </Border>
                     <ComboBox x:Name="CmbSortRole"
                               Width="300"
-                              DisplayMemberPath="NameRole"
+                              DisplayMemberPath="RoleName"
                               SelectionChanged="CmbSortRole_SelectionChanged"></ComboBox>
                 </StackPanel>
                 <DataGrid x:Name="DGridUsers"
@@ -95,7 +95,7 @@
                             <DataGridTextColumn.Header>Пользователь</DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTextColumn Width="200"
-                                            Binding="{Binding Role.NameRole}">
+                                            Binding="{Binding Role.RoleName}">
                             <DataGridTextColumn.Header>Роль</DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTemplateColumn Width="30">

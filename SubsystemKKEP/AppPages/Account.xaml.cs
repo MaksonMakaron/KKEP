@@ -28,7 +28,7 @@ namespace SubsystemKKEP.AppPages
         {
             InitializeComponent();
             TbName.Text = InterfaceManagement.ManagementUser.UserName;
-            TbRole.Text = InterfaceManagement.ManagementUser.Role.NameRole;
+            TbRole.Text = InterfaceManagement.ManagementUser.Role.RoleName;
             TbLogIn.Text = InterfaceManagement.LogInUser.DateLogIn.ToString("G");
         }
 
