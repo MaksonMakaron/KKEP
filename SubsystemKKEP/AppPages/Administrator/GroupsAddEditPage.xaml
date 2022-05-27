@@ -8,7 +8,141 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GroupsAddEditPage">
 
-    <Grid>
-        
-    </Grid>
+    <Border CornerRadius="0 20 20 0"
+            Background="White">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Background="#D3F2FF"
+                        Grid.Row="0">
+                <Button x:Name="BtnBack"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnBack_Click"
+                        ToolTip="Назад">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Back.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Background="White"
+                        Grid.Row="1">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Наименование группы:" 
+                                   Margin="0"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                        <Border Background="White"
+                                BorderThickness="0.5"
+                                BorderBrush="#FFABADB3"
+                                CornerRadius="5"
+                                Padding="3,1"
+                                Width="200"
+                                Margin="10"
+                                ToolTip="Наименование группы">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <TextBox x:Name="TbGroupName"
+                                         Text="{Binding GroupName}"
+                                         Margin="0"
+                                         Height="30"
+                                         MaxLength="30"
+                                         HorizontalAlignment="Stretch"
+                                         HorizontalContentAlignment="Left"
+                                         TabIndex="1" Width="190">
+                                </TextBox>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Номер:" 
+                                   Margin="0"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                        <Border Background="White"
+                                BorderThickness="0.5"
+                                BorderBrush="#FFABADB3"
+                                CornerRadius="5"
+                                Padding="3,1"
+                                Width="120"
+                                Margin="10"
+                                ToolTip="Номер группы">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <TextBox x:Name="TbGroupNumber"
+                                         Text="{Binding GroupNumber}"
+                                         Margin="0"
+                                         PreviewTextInput="TbGroupNumber_PreviewTextInput"
+                                         Height="30"
+                                         MaxLength="5"
+                                         HorizontalAlignment="Stretch"
+                                         HorizontalContentAlignment="Left"
+                                         TabIndex="1" Width="100">
+                                </TextBox>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0 0 10 10">
+                        <TextBlock Text="Специальность" 
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,10"></TextBlock>
+                        <ComboBox x:Name="CmbSpecialization"
+                                  Width="170"
+                                  ToolTip="Специальность группы"
+                                  SelectedItem="{Binding Specialization}"
+                                  DisplayMemberPath="ShortName"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="10 0 0 10">
+                        <TextBlock Text="Курс" 
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,10"></TextBlock>
+                        <ComboBox x:Name="CmbCourse"
+                                  SelectedItem="{Binding CourseOfStudy}"
+                                  Width="170"
+                                  ToolTip="Курс группы"></ComboBox>
+                    </StackPanel>
+                </StackPanel>
+                <Button x:Name="BtnSave"
+                        Click="BtnSave_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Image Source="/SubsystemKKEP;component/Resources/Save.png"
+                                   Style="{StaticResource IconButton}"></Image>
+                            <TextBlock Text="Сохранить"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource TextInBtnMenu}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>

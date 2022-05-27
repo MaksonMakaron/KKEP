@@ -32,7 +32,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                     <TextBlock Text="Логин:" 
-                               Margin="0,0,5,0"
+                               Margin="0,0,10,0"
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Center"></TextBlock>
                     <Border Background="White"
@@ -77,10 +77,11 @@
                                          MaxLength="20" TabIndex="2"/>
                             </Grid>
                             <Button x:Name="BtnSeePassword"
-                                Cursor="Hand"
-                                PreviewMouseDown="BtnSeePassword_PreviewMouseDown"
-                                PreviewMouseUp="BtnSeePassword_PreviewMouseUp"
-                                Style="{StaticResource btnSeePassword}" TabIndex="3">
+                                    Cursor="Hand"
+                                    ToolTip="Показать пароль"
+                                    PreviewMouseDown="BtnSeePassword_PreviewMouseDown"
+                                    PreviewMouseUp="BtnSeePassword_PreviewMouseUp"
+                                    Style="{StaticResource btnSeePassword}" TabIndex="3">
                                 <Button.Content>
                                     <Image Source="/SubsystemKKEP;component/Resources/Eye.png"
                                        Style="{StaticResource IconButton}"></Image>

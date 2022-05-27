@@ -31,7 +31,7 @@ namespace SubsystemKKEP.AppPages.Teacher
             {
                 markCurrent = mark;
             }
-            var students = App.DataBase.Students.Where(p => p.Groups.Select(q => q.Id).Contains(journalCurrent.IdGroup)).ToList();
+            var students = App.DataBase.Students.Where(p => p.Group.Id == journalCurrent.IdGroup).ToList();
             CmbStudent.ItemsSource = students;
             DataContext = markCurrent;
             DpDateMark.SelectedDate = DateTime.Now;
@@ -69,10 +69,6 @@ namespace SubsystemKKEP.AppPages.Teacher
             if (CmbStudent.SelectedIndex != 0 && CmbMark.SelectedIndex != 0
                 && DpDateMark.SelectedDate != null)
             {
-                var student = CmbStudent.SelectedItem;
-                var mark = CmbMark.SelectedItem;
-                var date = DpDateMark.SelectedDate;
-
                 if (markCurrent.Id == 0)
                 {
                     App.DataBase.Marks.Add(markCurrent);

@@ -42,49 +42,7 @@ namespace SubsystemKKEP.Classes
         /// </summary>
         public static LogIn LogInUser { get; set; }
 
-        /// <summary>
-        /// При нажатии кнопки мыши - пароль показывается 
-        /// </summary>
-        /// <param name="TbPassword">элемент textbox</param>
-        /// <param name="PbPassword">элемент passwordbox</param>
-        public static void SeePasswordPreviewMouseDown(TextBox TbPassword, PasswordBox PbPassword)
-        {
-            TbPassword.Text = PbPassword.Password;
-            PbPassword.Visibility = Visibility.Hidden;
-            TbPassword.Visibility = Visibility.Visible;
-        }
-
-        /// <summary>
-        /// При нажатии кнопки мыши - пароль скрывается 
-        /// </summary>
-        /// <param name="TbPassword">элемент textbox</param>
-        /// <param name="PbPassword">элемент passwordbox</param>
-        public static void SeePasswordPreviewMouseUp(TextBox TbPassword, PasswordBox PbPassword)
-        {
-            PbPassword.Password = TbPassword.Text;
-            TbPassword.Visibility = Visibility.Hidden;
-            PbPassword.Visibility = Visibility.Visible;
-        }
-
-        /// <summary>
-        /// Создание зашифрованного пароля
-        /// </summary>
-        /// <param name="input">входная строка для шифрования</param>
-        /// <returns></returns>
-        public static string CreateSHA512(string input)
-        {
-            using (SHA512 shaM = new SHA512Managed())
-            {
-                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-                byte[] hashBytes = shaM.ComputeHash(inputBytes);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < hashBytes.Length; i++)
-                {
-                    sb.Append(hashBytes[i].ToString("X2"));
-                }
-                return sb.ToString().ToLower();
-            }
-        }
+        
 
         /// <summary>
         /// Выход из аккаунта. Очистка свойств

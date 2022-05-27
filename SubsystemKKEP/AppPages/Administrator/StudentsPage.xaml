@@ -5,10 +5,136 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SubsystemKKEP.AppPages.Administrator"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="StudentsPage">
+      Title="StudentsPage" IsVisibleChanged="Page_IsVisibleChanged">
 
-    <Grid>
-        
-    </Grid>
+    <Border CornerRadius="0 20 20 0"
+            Background="White">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Background="#D3F2FF"
+                        Grid.Row="0">
+                <Button x:Name="BtnAddStudent"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnAddStudent_Click"
+                        ToolTip="Добавить студента">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Add.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="BtnDeleteStudent"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnDeleteStudent_Click"
+                        ToolTip="Удалить студента">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Delete.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Grid.Row="1">
+                <GroupBox Header="Поиск и сортировка"
+                          HorizontalAlignment="Center"
+                          Margin="0 10">
+                    <StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    Visibility="Collapsed"
+                                    x:Name="PopupSearch"
+                                    HorizontalAlignment="Center">
+                            <Image Source="/SubsystemKKEP;component/Resources/Info.png"
+                                   Style="{StaticResource IconButton}"
+                                   Width="40"></Image>
+                            <TextBlock Text="Ничего не найдено :("
+                                       FontSize="16"
+                                       FontFamily="Segoe UI"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Border Background="White"
+                                    BorderThickness="0.5"
+                                    BorderBrush="#FFABADB3"
+                                    CornerRadius="5"
+                                    Padding="3,1"
+                                    Width="765"
+                                    Margin="10"
+                                    ToolTip="Поиск по ФИО студента">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <TextBox x:Name="TbSearch"
+                                             Margin="0"
+                                             MaxLength="30"
+                                             HorizontalContentAlignment="Left"
+                                             Width="720"
+                                             TabIndex="1"
+                                             TextChanged="TbSearch_TextChanged">
+                                    </TextBox>
+                                    <Image Source="/SubsystemKKEP;component/Resources/Search.png"
+                                           Style="{StaticResource IconButton}"></Image>
+                                </StackPanel>
+                            </Border>
+                            <ComboBox x:Name="CmbSortGroup"
+                                      Width="300"
+                                      ToolTip="Сортировка по группе"
+                                      DisplayMemberPath="GroupName"
+                                      SelectionChanged="CmbSortGroup_SelectionChanged"></ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+
+                </GroupBox>
+                <DataGrid x:Name="DGridStudents"
+                          MinHeight="450"
+                          MaxHeight="450"
+                          HorizontalAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          MaxWidth="1100"
+                          Width="1100"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*"
+                                            MinWidth="200"
+                                            Binding="{Binding FullName}">
+                            <DataGridTextColumn.Header>Студент</DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="200"
+                                            Binding="{Binding Group.GroupName}">
+                            <DataGridTextColumn.Header>Группа</DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="100"
+                                            Binding="{Binding Group.CourseOfStudy}">
+                            <DataGridTextColumn.Header>Курс</DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="200"
+                                            Binding="{Binding Group.Specialization.ShortName}">
+                            <DataGridTextColumn.Header>Специальность</DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Width="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="BtnEditStudent"
+                                            Click="BtnEditStudent_Click"
+                                            Style="{StaticResource BtnTaskBar}">
+                                        <Button.Content>
+                                            <Image Source="/SubsystemKKEP;component/Resources/Edit.png"
+                                                   Style="{StaticResource IconButton}"
+                                                   Width="20"></Image>
+                                        </Button.Content>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>

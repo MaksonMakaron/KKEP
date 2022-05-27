@@ -12,22 +12,13 @@ namespace SubsystemKKEP.Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class DisciplineOfDepartment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
-        {
-            this.Marks = new HashSet<Mark>();
-        }
+        public int IdDepartment { get; set; }
+        public int IdDiscipline { get; set; }
+        public string CourseOfStudy { get; set; }
     
-        public int Id { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string Patronymic { get; set; }
-        public Nullable<int> IdGroup { get; set; }
-    
-        public virtual Group Group { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mark> Marks { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Discipline Discipline { get; set; }
     }
 }

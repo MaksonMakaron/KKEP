@@ -41,7 +41,7 @@ namespace SubsystemKKEP.AppWindows
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSeePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            InterfaceManagement.SeePasswordPreviewMouseDown(TbPassword, PbPassword);
+            PasswordLoginManagement.SeePasswordPreviewMouseDown(TbPassword, PbPassword);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace SubsystemKKEP.AppWindows
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSeePassword_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            InterfaceManagement.SeePasswordPreviewMouseUp(TbPassword, PbPassword);
+            PasswordLoginManagement.SeePasswordPreviewMouseUp(TbPassword, PbPassword);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace SubsystemKKEP.AppWindows
         {
             var users = App.DataBase.Users.ToList();
             var authorization = false;
-            password = InterfaceManagement.CreateSHA512(password).ToLower();
+            password = PasswordLoginManagement.CreateSHA512(password).ToLower();
             for (int i = 0; i < users.Count; i++)
             {
                 if (login == users[i].Login && password == users[i].Password)
@@ -171,17 +171,24 @@ namespace SubsystemKKEP.AppWindows
         /// <summary>
         /// Запись входа в систему
         /// </summary>
-        /// <param name="ConcreteUser">пользователь, который авторизовался</param>
-        private static void RecordLogIn(User ConcreteUser)
+        /// <param name="concreteUser">пользователь, который авторизовался</param>
+        private static void RecordLogIn(User concreteUser)
         {
             LogIn logIn = new LogIn
             {
-                User = ConcreteUser,
+                User = concreteUser,
                 DateLogIn = DateTime.Now
             };
-            App.DataBase.LogIns.Add(logIn);
-            App.DataBase.SaveChanges();
-            InterfaceManagement.LogInUser = logIn;
+            try
+            {
+                App.DataBase.LogIns.Add(logIn);
+                App.DataBase.SaveChanges();
+                InterfaceManagement.LogInUser = logIn;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

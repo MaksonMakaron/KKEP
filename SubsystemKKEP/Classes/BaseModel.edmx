@@ -29,8 +29,16 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisciplineName" Type="varchar" MaxLength="120" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DisciplineOfDepartment">
+          <Key>
+            <PropertyRef Name="IdDepartment" />
+            <PropertyRef Name="IdDiscipline" />
+            <PropertyRef Name="CourseOfStudy" />
+          </Key>
+          <Property Name="IdDepartment" Type="int" Nullable="false" />
+          <Property Name="IdDiscipline" Type="int" Nullable="false" />
           <Property Name="CourseOfStudy" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="IdDeprartment" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -85,14 +93,7 @@
           <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="StudentOfGroup">
-          <Key>
-            <PropertyRef Name="IdStudent" />
-            <PropertyRef Name="IdGroup" />
-          </Key>
-          <Property Name="IdStudent" Type="int" Nullable="false" />
-          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdGroup" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -168,17 +169,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Discipline_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Discipline" Type="Self.Discipline" Multiplicity="*" />
+        <Association Name="FK_DisciplineOfDepartment_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="DisciplineOfDepartment" Type="Self.DisciplineOfDepartment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Discipline">
-              <PropertyRef Name="IdDeprartment" />
+            <Dependent Role="DisciplineOfDepartment">
+              <PropertyRef Name="IdDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisciplineOfDepartment_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="DisciplineOfDepartment" Type="Self.DisciplineOfDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisciplineOfDepartment">
+              <PropertyRef Name="IdDiscipline" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -262,31 +273,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentOfGroup_Group">
-          <End Role="Group" Type="Self.Group" Multiplicity="1">
+        <Association Name="FK_Student_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="StudentOfGroup" Type="Self.StudentOfGroup" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StudentOfGroup">
+            <Dependent Role="Student">
               <PropertyRef Name="IdGroup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentOfGroup_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="StudentOfGroup" Type="Self.StudentOfGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentOfGroup">
-              <PropertyRef Name="IdStudent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -306,13 +303,13 @@
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisciplineOfDepartment" EntityType="Self.DisciplineOfDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LogIn" EntityType="Self.LogIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mark" EntityType="Self.Mark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StudentOfGroup" EntityType="Self.StudentOfGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Appointment_Discipline" Association="Self.FK_Appointment_Discipline">
@@ -331,9 +328,13 @@
             <End Role="User" EntitySet="User" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
-          <AssociationSet Name="FK_Discipline_Department" Association="Self.FK_Discipline_Department">
+          <AssociationSet Name="FK_DisciplineOfDepartment_Department" Association="Self.FK_DisciplineOfDepartment_Department">
             <End Role="Department" EntitySet="Department" />
+            <End Role="DisciplineOfDepartment" EntitySet="DisciplineOfDepartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisciplineOfDepartment_Discipline" Association="Self.FK_DisciplineOfDepartment_Discipline">
             <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="DisciplineOfDepartment" EntitySet="DisciplineOfDepartment" />
           </AssociationSet>
           <AssociationSet Name="FK_Group_Specialization" Association="Self.FK_Group_Specialization">
             <End Role="Specialization" EntitySet="Specialization" />
@@ -359,13 +360,9 @@
             <End Role="Department" EntitySet="Department" />
             <End Role="Specialization" EntitySet="Specialization" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentOfGroup_Group" Association="Self.FK_StudentOfGroup_Group">
+          <AssociationSet Name="FK_Student_Group" Association="Self.FK_Student_Group">
             <End Role="Group" EntitySet="Group" />
-            <End Role="StudentOfGroup" EntitySet="StudentOfGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentOfGroup_Student" Association="Self.FK_StudentOfGroup_Student">
             <End Role="Student" EntitySet="Student" />
-            <End Role="StudentOfGroup" EntitySet="StudentOfGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -398,7 +395,7 @@
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Department_User" FromRole="Department" ToRole="User" />
-          <NavigationProperty Name="Disciplines" Relationship="Self.FK_Discipline_Department" FromRole="Department" ToRole="Discipline" />
+          <NavigationProperty Name="DisciplineOfDepartments" Relationship="Self.FK_DisciplineOfDepartment_Department" FromRole="Department" ToRole="DisciplineOfDepartment" />
           <NavigationProperty Name="Specializations" Relationship="Self.FK_Specialization_Department" FromRole="Department" ToRole="Specialization" />
         </EntityType>
         <EntityType Name="Discipline">
@@ -407,11 +404,21 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisciplineName" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CourseOfStudy" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="IdDeprartment" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointment_Discipline" FromRole="Discipline" ToRole="Appointment" />
-          <NavigationProperty Name="Department" Relationship="Self.FK_Discipline_Department" FromRole="Discipline" ToRole="Department" />
+          <NavigationProperty Name="DisciplineOfDepartments" Relationship="Self.FK_DisciplineOfDepartment_Discipline" FromRole="Discipline" ToRole="DisciplineOfDepartment" />
           <NavigationProperty Name="Marks" Relationship="Self.FK_Mark_Discipline" FromRole="Discipline" ToRole="Mark" />
+        </EntityType>
+        <EntityType Name="DisciplineOfDepartment">
+          <Key>
+            <PropertyRef Name="IdDepartment" />
+            <PropertyRef Name="IdDiscipline" />
+            <PropertyRef Name="CourseOfStudy" />
+          </Key>
+          <Property Name="IdDepartment" Type="Int32" Nullable="false" />
+          <Property Name="IdDiscipline" Type="Int32" Nullable="false" />
+          <Property Name="CourseOfStudy" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_DisciplineOfDepartment_Department" FromRole="DisciplineOfDepartment" ToRole="Department" />
+          <NavigationProperty Name="Discipline" Relationship="Self.FK_DisciplineOfDepartment_Discipline" FromRole="DisciplineOfDepartment" ToRole="Discipline" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -424,7 +431,7 @@
           <Property Name="IdSpecialization" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointment_Group" FromRole="Group" ToRole="Appointment" />
           <NavigationProperty Name="Specialization" Relationship="Self.FK_Group_Specialization" FromRole="Group" ToRole="Specialization" />
-          <NavigationProperty Name="Students" Relationship="Self.StudentOfGroup" FromRole="Group" ToRole="Student" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Group" FromRole="Group" ToRole="Student" />
         </EntityType>
         <EntityType Name="LogIn">
           <Key>
@@ -476,8 +483,9 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdGroup" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Student_Group" FromRole="Student" ToRole="Group" />
           <NavigationProperty Name="Marks" Relationship="Self.FK_Mark_Student" FromRole="Student" ToRole="Mark" />
-          <NavigationProperty Name="Groups" Relationship="Self.StudentOfGroup" FromRole="Student" ToRole="Group" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -558,17 +566,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Discipline_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Discipline" Type="Self.Discipline" Multiplicity="*" />
+        <Association Name="FK_DisciplineOfDepartment_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="DisciplineOfDepartment" Type="Self.DisciplineOfDepartment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Discipline">
-              <PropertyRef Name="IdDeprartment" />
+            <Dependent Role="DisciplineOfDepartment">
+              <PropertyRef Name="IdDepartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -581,6 +587,18 @@
             </Principal>
             <Dependent Role="Specialization">
               <PropertyRef Name="IdDepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisciplineOfDepartment_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="DisciplineOfDepartment" Type="Self.DisciplineOfDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DisciplineOfDepartment">
+              <PropertyRef Name="IdDiscipline" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -609,6 +627,20 @@
             </Principal>
             <Dependent Role="Group">
               <PropertyRef Name="IdSpecialization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="IdGroup" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -664,14 +696,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="StudentOfGroup">
-          <End Role="Group" Type="Self.Group" Multiplicity="*" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="DB_KKEPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Appointments" EntityType="Self.Appointment" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Disciplines" EntityType="Self.Discipline" />
+          <EntitySet Name="DisciplineOfDepartments" EntityType="Self.DisciplineOfDepartment" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="LogIns" EntityType="Self.LogIn" />
           <EntitySet Name="Marks" EntityType="Self.Mark" />
@@ -696,13 +725,17 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
-          <AssociationSet Name="FK_Discipline_Department" Association="Self.FK_Discipline_Department">
+          <AssociationSet Name="FK_DisciplineOfDepartment_Department" Association="Self.FK_DisciplineOfDepartment_Department">
             <End Role="Department" EntitySet="Departments" />
-            <End Role="Discipline" EntitySet="Disciplines" />
+            <End Role="DisciplineOfDepartment" EntitySet="DisciplineOfDepartments" />
           </AssociationSet>
           <AssociationSet Name="FK_Specialization_Department" Association="Self.FK_Specialization_Department">
             <End Role="Department" EntitySet="Departments" />
             <End Role="Specialization" EntitySet="Specializations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisciplineOfDepartment_Discipline" Association="Self.FK_DisciplineOfDepartment_Discipline">
+            <End Role="Discipline" EntitySet="Disciplines" />
+            <End Role="DisciplineOfDepartment" EntitySet="DisciplineOfDepartments" />
           </AssociationSet>
           <AssociationSet Name="FK_Mark_Discipline" Association="Self.FK_Mark_Discipline">
             <End Role="Discipline" EntitySet="Disciplines" />
@@ -711,6 +744,10 @@
           <AssociationSet Name="FK_Group_Specialization" Association="Self.FK_Group_Specialization">
             <End Role="Specialization" EntitySet="Specializations" />
             <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Group" Association="Self.FK_Student_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Student" EntitySet="Students" />
           </AssociationSet>
           <AssociationSet Name="FK_LogIn_User" Association="Self.FK_LogIn_User">
             <End Role="User" EntitySet="Users" />
@@ -727,10 +764,6 @@
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="StudentOfGroup" Association="Self.StudentOfGroup">
-            <End Role="Group" EntitySet="Groups" />
-            <End Role="Student" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -762,8 +795,15 @@
               <MappingFragment StoreEntitySet="Discipline">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DisciplineName" ColumnName="DisciplineName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisciplineOfDepartments">
+            <EntityTypeMapping TypeName="DB_KKEPModel.DisciplineOfDepartment">
+              <MappingFragment StoreEntitySet="DisciplineOfDepartment">
+                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+                <ScalarProperty Name="IdDiscipline" ColumnName="IdDiscipline" />
                 <ScalarProperty Name="CourseOfStudy" ColumnName="CourseOfStudy" />
-                <ScalarProperty Name="IdDeprartment" ColumnName="IdDeprartment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -824,6 +864,7 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -849,14 +890,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="StudentOfGroup" TypeName="DB_KKEPModel.StudentOfGroup" StoreEntitySet="StudentOfGroup">
-            <EndProperty Name="Group">
-              <ScalarProperty Name="Id" ColumnName="IdGroup" />
-            </EndProperty>
-            <EndProperty Name="Student">
-              <ScalarProperty Name="Id" ColumnName="IdStudent" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

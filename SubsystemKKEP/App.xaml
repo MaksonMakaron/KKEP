@@ -67,6 +67,10 @@
                 <Setter Property="FontSize" Value="50"></Setter>
                 <Setter Property="FontWeight" Value="Medium"></Setter>
             </Style>
+
+            <Style TargetType="GroupBox">
+                <Setter Property="Foreground" Value="#003C83"></Setter>
+            </Style>
             
         </ResourceDictionary>
     </Application.Resources>

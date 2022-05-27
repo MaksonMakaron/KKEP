@@ -28,6 +28,7 @@ namespace SubsystemKKEP.Classes
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Discipline> Disciplines { get; set; }
+        public virtual DbSet<DisciplineOfDepartment> DisciplineOfDepartments { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<LogIn> LogIns { get; set; }
         public virtual DbSet<Mark> Marks { get; set; }

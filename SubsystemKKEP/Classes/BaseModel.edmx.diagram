@@ -4,31 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="633decd0a0434c03a34b70684765b587" Name="Diagram1" ZoomLevel="90">
-        <EntityTypeShape EntityType="DB_KKEPModel.Appointment" Width="1.5" PointX="12" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Department" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Discipline" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Group" Width="1.5" PointX="9.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.LogIn" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Mark" Width="1.5" PointX="14.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Role" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Specialization" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Student" Width="1.5" PointX="12" PointY="9.25" IsExpanded="true" />
+      <Diagram DiagramId="e66c0e251f094df0bd6f4f4c3f14b444" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_KKEPModel.Appointment" Width="1.5" PointX="12" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Department" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Discipline" Width="1.5" PointX="9.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.DisciplineOfDepartment" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Group" Width="1.5" PointX="9.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.LogIn" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Mark" Width="1.5" PointX="14.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Role" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Specialization" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Student" Width="1.5" PointX="12" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_KKEPModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.User" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.User" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="DB_KKEPModel.FK_Appointment_Discipline" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Appointment_Group" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Appointment_User" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Department_User" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_KKEPModel.FK_Discipline_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_KKEPModel.FK_DisciplineOfDepartment_Department" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Specialization_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_KKEPModel.FK_DisciplineOfDepartment_Discipline" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Mark_Discipline" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Group_Specialization" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_KKEPModel.FK_Student_Group" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_LogIn_User" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Mark_Student" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_Mark_User" ManuallyRouted="false" />
         <AssociationConnector Association="DB_KKEPModel.FK_User_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_KKEPModel.StudentOfGroup" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

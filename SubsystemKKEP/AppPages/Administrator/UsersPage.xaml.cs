@@ -47,7 +47,7 @@ namespace SubsystemKKEP.AppPages.Administrator
 
             if (currentUsers.Count() > 0)
             {
-                PopupSearch.Visibility = Visibility.Hidden;
+                PopupSearch.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -63,7 +63,7 @@ namespace SubsystemKKEP.AppPages.Administrator
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnAddUser_Click(object sender, RoutedEventArgs e)
         {
-
+            InterfaceManagement.ManagementPage.Navigate(new UserAddEdit(null));
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace SubsystemKKEP.AppPages.Administrator
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnEditUser_Click(object sender, RoutedEventArgs e)
         {
-
+            InterfaceManagement.ManagementPage.Navigate(new UserAddEdit((sender as Button).DataContext as User));
         }
 
         /// <summary>

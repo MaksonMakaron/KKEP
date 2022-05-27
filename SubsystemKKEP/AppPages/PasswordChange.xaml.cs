@@ -36,7 +36,7 @@ namespace SubsystemKKEP.AppPages
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSeeOldPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            InterfaceManagement.SeePasswordPreviewMouseUp(TbOldPassword, PbOldPassword);
+            PasswordLoginManagement.SeePasswordPreviewMouseUp(TbOldPassword, PbOldPassword);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace SubsystemKKEP.AppPages
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSeeOldPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            InterfaceManagement.SeePasswordPreviewMouseDown(TbOldPassword, PbOldPassword);
+            PasswordLoginManagement.SeePasswordPreviewMouseDown(TbOldPassword, PbOldPassword);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace SubsystemKKEP.AppPages
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnNewSeePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            InterfaceManagement.SeePasswordPreviewMouseDown(TbNewPassword, PbNewPassword);
+            PasswordLoginManagement.SeePasswordPreviewMouseDown(TbNewPassword, PbNewPassword);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace SubsystemKKEP.AppPages
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnNewSeePassword_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            InterfaceManagement.SeePasswordPreviewMouseUp(TbNewPassword, PbNewPassword);
+            PasswordLoginManagement.SeePasswordPreviewMouseUp(TbNewPassword, PbNewPassword);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace SubsystemKKEP.AppPages
         private static void ChangePassword(string NewPassword)
         {
             User user = App.DataBase.Users.Where(p => p.Id == InterfaceManagement.ManagementUser.Id).FirstOrDefault();
-            user.Password = InterfaceManagement.CreateSHA512(NewPassword);
+            user.Password = PasswordLoginManagement.CreateSHA512(NewPassword);
             App.DataBase.SaveChanges();
         }
 
@@ -154,7 +154,7 @@ namespace SubsystemKKEP.AppPages
         private static bool PasswordCheck(string EnteredPassword)
         {
             var users = App.DataBase.Users.ToList();
-            EnteredPassword = InterfaceManagement.CreateSHA512(EnteredPassword).ToLower();
+            EnteredPassword = PasswordLoginManagement.CreateSHA512(EnteredPassword).ToLower();
             for (int i = 0; i < users.Count; i++)
             {
                 if (EnteredPassword == users[i].Password)

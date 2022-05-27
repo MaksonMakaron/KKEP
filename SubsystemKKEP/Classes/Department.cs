@@ -17,7 +17,7 @@ namespace SubsystemKKEP.Classes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            this.Disciplines = new HashSet<Discipline>();
+            this.DisciplineOfDepartments = new HashSet<DisciplineOfDepartment>();
             this.Specializations = new HashSet<Specialization>();
         }
     
@@ -27,7 +27,7 @@ namespace SubsystemKKEP.Classes
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Discipline> Disciplines { get; set; }
+        public virtual ICollection<DisciplineOfDepartment> DisciplineOfDepartments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Specialization> Specializations { get; set; }
     }

@@ -5,10 +5,99 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SubsystemKKEP.AppPages.Administrator"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="AppointmentAddEditPage">
 
-    <Grid>
-        
-    </Grid>
+    <Border CornerRadius="0 20 20 0"
+            Background="White">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Background="#D3F2FF"
+                        Grid.Row="0">
+                <Button x:Name="BtnBack"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnBack_Click"
+                        ToolTip="Назад">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Back.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Grid.Row="1">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="0 0 0 10">
+                        <TextBlock Text="Дисциплина:" 
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"></TextBlock>
+                        <ComboBox x:Name="CmbDiscipline"
+                              Width="600"
+                              ToolTip="Выбор дисциплины"
+                              SelectedItem="{Binding Discipline}"
+                              DisplayMemberPath="DisciplineName"></ComboBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,5,10">
+                            <TextBlock Text="Преподаватель:" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,10"></TextBlock>
+                            <ComboBox x:Name="CmbUser"
+                                      Width="300"
+                                      ToolTip="Выбор преподавателя"
+                                      SelectedItem="{Binding User}"
+                                      DisplayMemberPath="UserName"></ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="5,0,0,10">
+                            <TextBlock Text="Группа:" 
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"></TextBlock>
+                            <ComboBox x:Name="CmbGroup"
+                                      Width="300"
+                                      ToolTip="Группа"
+                                      SelectedItem="{Binding Group}"
+                                      DisplayMemberPath="GroupName"></ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <Button x:Name="BtnSave"
+                        Click="BtnSave_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Image Source="/SubsystemKKEP;component/Resources/Save.png"
+                                   Style="{StaticResource IconButton}"></Image>
+                            <TextBlock Text="Сохранить"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource TextInBtnMenu}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>

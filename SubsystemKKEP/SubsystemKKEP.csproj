@@ -162,6 +162,9 @@
     <Compile Include="Classes\Discipline.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\DisciplineOfDepartment.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Group.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -172,6 +175,7 @@
     <Compile Include="Classes\Mark.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\PasswordLoginManagement.cs" />
     <Compile Include="Classes\Role.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>

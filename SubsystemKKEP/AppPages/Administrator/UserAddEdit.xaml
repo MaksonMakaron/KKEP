@@ -7,8 +7,172 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UserAddEdit">
-
-    <Grid>
-        
-    </Grid>
+    <Border CornerRadius="0 20 20 0"
+            Background="White">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Background="#D3F2FF"
+                        Grid.Row="0">
+                <Button x:Name="BtnBack"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnBack_Click"
+                        ToolTip="Назад">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Back.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Grid.Row="1">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Имя пользователя:" 
+                                   Margin="0"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                        <Border Background="White"
+                                BorderThickness="0.5"
+                                BorderBrush="#FFABADB3"
+                                CornerRadius="5"
+                                Padding="3,1"
+                                Width="440"
+                                Margin="10"
+                                ToolTip="Имя пользователя, например: Иванов Иван Иванович">
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <TextBox x:Name="TbUserName"
+                                         Margin="0"
+                                         Height="30"
+                                         Text="{Binding UserName}"
+                                         MaxLength="100"
+                                         HorizontalAlignment="Stretch"
+                                         HorizontalContentAlignment="Left"
+                                         TabIndex="1" Width="430">
+                                </TextBox>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="0 0 0 10">
+                    <TextBlock Text="Роль" 
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"></TextBlock>
+                    <ComboBox x:Name="CmbRole"
+                              Width="300"
+                              ToolTip="Роль пользователя"
+                              SelectedItem="{Binding Role}"
+                              DisplayMemberPath="RoleName"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <TextBlock Text="Логин:" 
+                                       Margin="0"
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center"></TextBlock>
+                            <Border Background="White"
+                                    BorderThickness="0.5"
+                                    BorderBrush="#FFABADB3"
+                                    CornerRadius="5"
+                                    Padding="3,1"
+                                    Width="200"
+                                    Margin="10"
+                                    ToolTip="Логин">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <TextBox x:Name="TbLogin"
+                                             Margin="0"
+                                             Height="30"
+                                             Text="{Binding Login}"
+                                             MaxLength="30"
+                                             HorizontalAlignment="Stretch"
+                                             HorizontalContentAlignment="Left"
+                                             TabIndex="1" Width="190">
+                                    </TextBox>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    x:Name="UnitPassword"
+                                    ToolTip="Пароль задается только новому пользователю и не подлежит изменению со стороны 3-их лиц"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="Пароль:"
+                                       Margin="0"
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center"></TextBlock>
+                            <Border Background="White"
+                                    BorderThickness="0.5"
+                                    BorderBrush="#FFABADB3"
+                                    CornerRadius="5"
+                                    Padding="3,1"
+                                    Width="200"
+                                    Margin="10">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                    <Grid Background="Transparent">
+                                        <TextBox x:Name="TbPassword"
+                                                 MaxLength="20"
+                                                 Width="{Binding ElementName=PbPassword}"
+                                                 Margin="0"></TextBox>
+                                        <PasswordBox x:Name="PbPassword"
+                                                     Width="160"
+                                                     MaxLength="20" TabIndex="2"/>
+                                    </Grid>
+                                    <Button x:Name="BtnSeePassword"
+                                            Cursor="Hand"
+                                            PreviewMouseDown="BtnSeePassword_PreviewMouseDown"
+                                            PreviewMouseUp="BtnSeePassword_PreviewMouseUp"
+                                            Style="{StaticResource btnSeePassword}" TabIndex="3">
+                                        <Button.Content>
+                                            <Image Source="/SubsystemKKEP;component/Resources/Eye.png"
+                                                   Style="{StaticResource IconButton}"></Image>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <Button x:Name="BtnSave"
+                        Click="BtnSave_Click">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                            <Image Source="/SubsystemKKEP;component/Resources/Save.png"
+                                   Style="{StaticResource IconButton}"></Image>
+                            <TextBlock Text="Сохранить"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource TextInBtnMenu}"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Page>
