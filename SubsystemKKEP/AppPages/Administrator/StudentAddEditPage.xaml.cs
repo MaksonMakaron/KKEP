@@ -21,7 +21,15 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class StudentAddEditPage : Page
     {
+        /// <summary>
+        /// Текущий студент
+        /// </summary>
         private Student currentStudent = new Student();
+
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="student">выбранный студент</param>
         public StudentAddEditPage(Student student)
         {
             InitializeComponent();
@@ -33,6 +41,11 @@ namespace SubsystemKKEP.AppPages.Administrator
             DataContext = currentStudent;
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - сохранение информации
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -70,6 +83,11 @@ namespace SubsystemKKEP.AppPages.Administrator
 
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - возврат на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();

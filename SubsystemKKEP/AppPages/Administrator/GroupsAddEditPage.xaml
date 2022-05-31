@@ -128,6 +128,13 @@
                                   ToolTip="Курс группы"></ComboBox>
                     </StackPanel>
                 </StackPanel>
+                <CheckBox x:Name="CbIsArchive"
+                          HorizontalAlignment="Center"
+                          Content="В архиве"
+                          ToolTip="Если отмечено, значит группа находится в архиве. Студенты группы выпустились"
+                          IsChecked="{Binding IsArchive}"
+                          VerticalContentAlignment="Center"
+                          FontSize="14"></CheckBox>
                 <Button x:Name="BtnSave"
                         Click="BtnSave_Click">
                     <Button.Content>

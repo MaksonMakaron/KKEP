@@ -21,6 +21,9 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class UsersPage : Page
     {
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
         public UsersPage()
         {
             InitializeComponent();
@@ -34,7 +37,9 @@ namespace SubsystemKKEP.AppPages.Administrator
             UpdateUsers();
         }
 
-
+        /// <summary>
+        /// Обновление списка пользователей в DataGrid
+        /// </summary>
         private void UpdateUsers()
         {
             var currentUsers = App.DataBase.Users.ToList();

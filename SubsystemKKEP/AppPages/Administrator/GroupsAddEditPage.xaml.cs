@@ -21,8 +21,15 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class GroupsAddEditPage : Page
     {
+        /// <summary>
+        /// Текущая группа
+        /// </summary>
         private Group currentGroup = new Group();
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="group">выбранная группа</param>
         public GroupsAddEditPage(Group group)
         {
             InitializeComponent();
@@ -40,11 +47,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             DataContext = currentGroup;
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        /// <summary>
+        /// При нажатию на кнопку - сохранение информации
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -75,6 +92,15 @@ namespace SubsystemKKEP.AppPages.Administrator
                 return;
             }
 
+            foreach (var group in App.DataBase.Groups.ToList())
+            {
+                if (group.GroupNumber == currentGroup.GroupNumber || group.GroupName == currentGroup.GroupName)
+                {
+                    MessageBox.Show("Такая группа уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             if (currentGroup.Id == 0)
             {
                 App.DataBase.Groups.Add(currentGroup);
@@ -93,6 +119,11 @@ namespace SubsystemKKEP.AppPages.Administrator
 
         }
 
+        /// <summary>
+        /// При вводе группы - ограничение на символы, отличающиеся от цифр
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void TbGroupNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !(Char.IsDigit(e.Text, 0));

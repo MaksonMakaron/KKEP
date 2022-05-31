@@ -21,11 +21,17 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class StudentsPage : Page
     {
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
         public StudentsPage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обновление списка студентов
+        /// </summary>
         private void UpdateStudents()
         {
             var currentStudents = App.DataBase.Students.ToList();
@@ -48,7 +54,11 @@ namespace SubsystemKKEP.AppPages.Administrator
             DGridStudents.ItemsSource = currentStudents.OrderBy(p => p.FullName);
         }
 
-
+        /// <summary>
+        /// При отображении страницы обновление данных
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var allGrops = App.DataBase.Groups.ToList();
@@ -61,11 +71,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             UpdateStudents();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на страницу с добавлением пользователя
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnAddStudent_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.Navigate(new StudentAddEditPage(null));
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - удаление студентов
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnDeleteStudent_Click(object sender, RoutedEventArgs e)
         {
             var studentsRemoving = DGridStudents.SelectedItems.Cast<Student>().ToList();
@@ -92,16 +112,31 @@ namespace SubsystemKKEP.AppPages.Administrator
             }
         }
 
+        /// <summary>
+        /// При изменении содержимого TextBox - обновление списка студентов
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateStudents();
         }
 
+        /// <summary>
+        /// При изменении выбранной группы - обновление списка
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void CmbSortGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateStudents();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на страницу с редактированием пользователя
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnEditStudent_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.Navigate(new StudentAddEditPage((sender as Button).DataContext as Student));

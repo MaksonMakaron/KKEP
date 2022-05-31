@@ -26,14 +26,6 @@
                                Style="{StaticResource IconButton}"></Image>
                     </Button.Content>
                 </Button>
-                <Button x:Name="BtnAddMark"
-                        Style="{StaticResource BtnTaskBar}"
-                        Click="BtnAddMark_Click">
-                    <Button.Content>
-                        <Image Source="/SubsystemKKEP;component/Resources/Add.png"
-                               Style="{StaticResource IconButton}"></Image>
-                    </Button.Content>
-                </Button>
                 <Button x:Name="BtnDeleteMark"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnDeleteMark_Click">
@@ -44,216 +36,207 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Vertical"
-                        VerticalAlignment="Center"
+                        VerticalAlignment="Stretch"
                         HorizontalAlignment="Center"
                         Grid.Row="1">
                 <TextBlock Text=""
                            FontWeight="Bold"
                            x:Name="TextTeacher"
+                           Margin="10"
                            HorizontalAlignment="Center"></TextBlock>
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center">
-                    <StackPanel Orientation="Vertical"
-                                x:Name="SpBinding"
-                                VerticalAlignment="Stretch"
-                                HorizontalAlignment="Center"
-                                Margin="0 0 0 10">
-                        <GroupBox Header="Поиск и сортировка"
-                                  Margin="5 0">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Vertical"
-                                            Visibility="Hidden"
-                                            x:Name="PopupSearch"
-                                            HorizontalAlignment="Center">
-                                    <Image Source="/SubsystemKKEP;component/Resources/Info.png"
-                                           Style="{StaticResource IconButton}"
-                                           Width="40"></Image>
-                                    <TextBlock Text="Ничего не найдено :("
-                                               FontSize="16"
-                                               FontFamily="Segoe UI"></TextBlock>
-                                </StackPanel>
-                                <Border Background="White"
-                                    BorderThickness="0.5"
-                                    VerticalAlignment="Center"
-                                    BorderBrush="#FFABADB3"
-                                    CornerRadius="5"
-                                    Padding="3,1"
-                                    Width="300"
-                                    Margin="10"
-                                    ToolTip="Поиск по ФИО">
-                                    <StackPanel Orientation="Horizontal"
-                                            VerticalAlignment="Stretch"
-                                            HorizontalAlignment="Center">
-                                        <TextBox x:Name="TbSearch"
-                                             Margin="0"
-                                             MaxLength="30"
-                                             HorizontalContentAlignment="Left"
-                                             Width="260"
-                                             TabIndex="1"
-                                             TextChanged="TbSearch_TextChanged">
-                                        </TextBox>
-                                        <Image Source="/SubsystemKKEP;component/Resources/Search.png"
-                                           Style="{StaticResource IconButton}"></Image>
-                                    </StackPanel>
-                                </Border>
-                                <Border Background="White"
-                                        BorderThickness="0.5"
-                                        BorderBrush="#FFABADB3"
-                                        CornerRadius="5"
-                                        Height="35"
-                                        ToolTip="Выберите дату для отображения оценок"
-                                        Padding="3,1"
-                                        Margin="10">
-                                    <StackPanel Orientation="Horizontal"
-                                                VerticalAlignment="Center"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical"
+                                    x:Name="SpBinding"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Center"
+                                    Margin="0 0 0 10">
+                            <GroupBox Header="Сортировка"
+                                      Margin="5 0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical"
+                                                Visibility="Collapsed"
+                                                x:Name="PopupSearch"
                                                 HorizontalAlignment="Center">
-                                        <DatePicker x:Name="DpDateMarkSorting"
-                                                    SelectedDateChanged="DpDateMarkSorting_SelectedDateChanged"
-                                                    Height="auto"
-                                                    Width="200">
-                                            <DatePicker.Resources>
-                                                <Style TargetType="DatePickerTextBox">
-                                                    <Setter Property="IsReadOnly" Value="True"/>
-                                                </Style>
-                                            </DatePicker.Resources>
-                                        </DatePicker>
+                                        <Image Source="/SubsystemKKEP;component/Resources/Info.png"
+                                               Style="{StaticResource IconButton}"
+                                               Width="40"></Image>
+                                        <TextBlock Text="Ничего не найдено :("
+                                                   FontSize="16"
+                                                   FontFamily="Segoe UI"></TextBlock>
                                     </StackPanel>
-                                </Border>
-                            </StackPanel>
-                        </GroupBox>
-                        <GroupBox Header="Оценка"
-                                  x:Name="GbMark"
-                                  Margin="5 0">
-                            <StackPanel Orientation="Vertical"
-                                        VerticalAlignment="Center">
-
-                                <StackPanel Orientation="Vertical"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                    <TextBlock Text="Студент:" 
-                                           Margin="0,0,5,0"
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Center"></TextBlock>
-                                    <ComboBox x:Name="CmbStudent"
-                                              SelectedItem="{Binding Student}"
-                                              DisplayMemberPath="FullName"
+                                    <ComboBox x:Name="CmbSortStudent"
+                                              DisplayMemberPath="ShortName"
                                               Margin="0 15"
-                                              Width="350"></ComboBox>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                    <StackPanel Orientation="Vertical"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center">
-                                        <TextBlock Text="Оценка:" 
-                                               Margin="0,0,5,0"
-                                               VerticalAlignment="Center" 
-                                               HorizontalAlignment="Center"></TextBlock>
-                                        <ComboBox x:Name="CmbMark"
-                                              SelectedItem="{Binding MarkValue}"
-                                              Width="60"
-                                              Margin="0 15"></ComboBox>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Center">
-                                        <TextBlock Text="Дата:" 
-                                               Margin="0,0,5,0"
-                                               VerticalAlignment="Center" 
-                                               HorizontalAlignment="Center"></TextBlock>
-                                        <Border Background="White"
+                                              Width="270"
+                                              ToolTip="Сортировка по студенту"
+                                              SelectionChanged="CmbSortStudent_SelectionChanged"></ComboBox>
+                                    <Border Background="White"
                                             BorderThickness="0.5"
                                             BorderBrush="#FFABADB3"
                                             CornerRadius="5"
                                             Height="35"
+                                            ToolTip="Выберите дату для отображения оценок"
                                             Padding="3,1"
                                             Margin="10">
-                                            <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                                <DatePicker x:Name="DpDateMark"
-                                                            Height="auto"
-                                                            SelectedDate="{Binding Date}"
-                                                            Width="200">
-                                                    <DatePicker.Resources>
-                                                        <Style TargetType="DatePickerTextBox">
-                                                            <Setter Property="IsReadOnly" Value="True"/>
-                                                        </Style>
-                                                    </DatePicker.Resources>
-                                                </DatePicker>
-                                            </StackPanel>
-                                        </Border>
-                                    </StackPanel>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center">
-                                    <Button Content="?"
-                                        x:Name="BtnHelp"
-                                        Padding="0"
-                                        FontSize="10"
-                                        Width="22" 
-                                        Height="22"
-                                        Click="BtnHelp_Click"></Button>
-                                    <Button x:Name="BtnSave"
-                                        Click="BtnSave_Click">
-                                        <Button.Content>
-                                            <StackPanel Orientation="Horizontal"
+                                        <StackPanel Orientation="Horizontal"
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center">
-                                                <Image Source="/SubsystemKKEP;component/Resources/Save.png"
-                                                    Style="{StaticResource IconButton}"></Image>
-                                                <TextBlock Text="Сохранить"
-                                                       VerticalAlignment="Center"
-                                                       Style="{StaticResource TextInBtnMenu}"/>
-                                            </StackPanel>
-                                        </Button.Content>
-                                    </Button>
+                                            <DatePicker x:Name="DpDateMarkSorting"
+                                                        SelectedDateChanged="DpDateMarkSorting_SelectedDateChanged"
+                                                        Height="auto"
+                                                        Width="200">
+                                            </DatePicker>
+                                        </StackPanel>
+                                    </Border>
                                 </StackPanel>
-                            </StackPanel>
-                        </GroupBox>
-                    </StackPanel>
-                    <DataGrid x:Name="DGridMarks"
-                              MinHeight="300"
-                              MaxHeight="{Binding ElementName=SpBinding, Path=Height}"
-                              Margin="15 0"
-                              VerticalAlignment="Stretch"
-                              HorizontalAlignment="Center"
-                              HorizontalContentAlignment="Center"
-                              MaxWidth="720"
-                              AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="400"
-                                            Binding="{Binding Student.FullName}">
-                                <DataGridTextColumn.Header>ФИО</DataGridTextColumn.Header>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width="200"
-                                            Binding="{Binding Date, StringFormat=dd.MM.yyyy}">
-                                <DataGridTextColumn.Header>Дата</DataGridTextColumn.Header>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width="70"
-                                            Binding="{Binding MarkValue}">
-                                <DataGridTextColumn.Header>Оценка</DataGridTextColumn.Header>
-                            </DataGridTextColumn>
-                            <DataGridTemplateColumn Width="30">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="BtnEditMark"
-                                            Click="BtnEditMark_Click"
-                                            Style="{StaticResource BtnTaskBar}">
+                            </GroupBox>
+                            <GroupBox Header="Добавление оценки"
+                                  x:Name="GbMark"
+                                  Margin="5 0">
+                                <StackPanel Orientation="Vertical"
+                                        VerticalAlignment="Center">
+                                    <StackPanel Orientation="Vertical"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+                                        <TextBlock Text="Студент:" 
+                                                   Margin="0,0,5,0"
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Center"></TextBlock>
+                                        <ComboBox x:Name="CmbStudent"
+                                                  SelectedItem="{Binding Student}"
+                                                  DisplayMemberPath="ShortName"
+                                                  Margin="0 15"
+                                                  Width="270"></ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center">
+                                        <StackPanel Orientation="Vertical"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <TextBlock Text="Оценка:" 
+                                                       VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Center"></TextBlock>
+                                            <ComboBox x:Name="CmbMark"
+                                                      SelectedItem="{Binding MarkValue}"
+                                                      Width="60"
+                                                      Margin="0 15"></ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="5 0">
+                                            <TextBlock Text="Дата:" 
+                                                   Margin="0"
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Center"></TextBlock>
+                                            <Border Background="White"
+                                                    BorderThickness="0.5"
+                                                    BorderBrush="#FFABADB3"
+                                                    CornerRadius="5"
+                                                    Height="35"
+                                                    Margin="0 15">
+                                                <StackPanel Orientation="Horizontal"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Center">
+                                                    <DatePicker x:Name="DpDateMark"
+                                                                Height="auto"
+                                                                SelectedDate="{Binding Date}"
+                                                                Width="200">
+                                                        <DatePicker.Resources>
+                                                            <Style TargetType="DatePickerTextBox">
+                                                                <Setter Property="IsReadOnly" Value="True"/>
+                                                            </Style>
+                                                        </DatePicker.Resources>
+                                                    </DatePicker>
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center">
+                                        <Button x:Name="BtnReset"
+                                                    Width="30"
+                                                    Height="30"
+                                                    ToolTip="Сбросить"
+                                                    Click="BtnReset_Click">
                                             <Button.Content>
-                                                <Image Source="/SubsystemKKEP;component/Resources/Edit.png"
-                                                   Style="{StaticResource IconButton}"
-                                                   Width="20"></Image>
+                                                <StackPanel Orientation="Horizontal"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Center">
+                                                    <Image Source="/SubsystemKKEP;component/Resources/Reset.png"
+                                                           Style="{StaticResource IconButton}"></Image>
+                                                </StackPanel>
                                             </Button.Content>
                                         </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                        <Button x:Name="BtnSaveOrAdd"
+                                                Click="BtnSaveOrAdd_Click">
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                                    <Image Source="/SubsystemKKEP;component/Resources/Add.png"
+                                                           Style="{StaticResource IconButton}"
+                                                           x:Name="ImgBtn"></Image>
+                                                    <TextBlock Text="Добавить"
+                                                               x:Name="TextAddOrEdit"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource TextInBtnMenu}"/>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                        <DataGrid x:Name="DGridMarks"
+                                  MinHeight="300"
+                                  Grid.Column="1"
+                                  Margin="15 0"
+                                  VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  HorizontalContentAlignment="Center"
+                                  MaxWidth="720"
+                                  AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="200"
+                                                    Binding="{Binding Student.ShortName}">
+                                    <DataGridTextColumn.Header>ФИО</DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="200"
+                                                    Binding="{Binding Date, StringFormat=dd.MM.yyyy}">
+                                    <DataGridTextColumn.Header>Дата</DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="70"
+                                                    Binding="{Binding MarkValue}">
+                                    <DataGridTextColumn.Header>Оценка</DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Width="30">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="BtnEditMark"
+                                                    Click="BtnEditMark_Click"
+                                                    Style="{StaticResource BtnTaskBar}">
+                                                <Button.Content>
+                                                    <Image Source="/SubsystemKKEP;component/Resources/Edit.png"
+                                                           Style="{StaticResource IconButton}"
+                                                           Width="20"></Image>
+                                                </Button.Content>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </Grid>

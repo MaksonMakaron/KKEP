@@ -120,9 +120,6 @@
     <Compile Include="AppPages\Teacher\GroupJournal.xaml.cs">
       <DependentUpon>GroupJournal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppPages\Teacher\MarkEditing.xaml.cs">
-      <DependentUpon>MarkEditing.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AppPages\Teacher\TeachingJournals.xaml.cs">
       <DependentUpon>TeachingJournals.xaml</DependentUpon>
     </Compile>
@@ -168,6 +165,7 @@
     <Compile Include="Classes\Group.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\GroupPartial.cs" />
     <Compile Include="Classes\InterfaceManagement.cs" />
     <Compile Include="Classes\LogIn.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
@@ -289,10 +287,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AppPages\Teacher\MarkEditing.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AppPages\Teacher\TeachingJournals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -395,6 +389,7 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Reset.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

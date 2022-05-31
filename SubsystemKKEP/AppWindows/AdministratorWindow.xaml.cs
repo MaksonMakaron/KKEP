@@ -21,6 +21,9 @@ namespace SubsystemKKEP.AppWindows
     /// </summary>
     public partial class AdministratorWindow : Window
     {
+        /// <summary>
+        /// Загрузка окна
+        /// </summary>
         public AdministratorWindow()
         {
             InitializeComponent();

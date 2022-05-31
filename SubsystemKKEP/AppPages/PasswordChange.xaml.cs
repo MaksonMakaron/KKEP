@@ -78,11 +78,11 @@ namespace SubsystemKKEP.AppPages
         {
             var oldPassword = PbOldPassword.Password;
             var newPassword = PbNewPassword.Password;
-            var passwordCheck = PasswordCheck(oldPassword);
+            var passwordCheck = PasswordLoginManagement.PasswordCheck(oldPassword);
             if (!string.IsNullOrWhiteSpace(oldPassword) && !string.IsNullOrWhiteSpace(newPassword) 
                 && oldPassword != newPassword && passwordCheck)
             {
-                ChangePassword(newPassword);
+                PasswordLoginManagement.ChangePassword(newPassword);
                 PbOldPassword.Password = "";
                 PbNewPassword.Password = "";
                 TbNewPassword.Text = "";
@@ -117,8 +117,8 @@ namespace SubsystemKKEP.AppPages
         /// <summary>
         /// По нажатию на кнопку - возврат на предыдущую страницу
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(PbOldPassword.Password) || !string.IsNullOrWhiteSpace(PbNewPassword.Password))
@@ -133,36 +133,6 @@ namespace SubsystemKKEP.AppPages
             {
                 InterfaceManagement.ManagementPage.GoBack();
             }
-        }
-
-        /// <summary>
-        /// Смена пароля
-        /// </summary>
-        /// <param name="NewPassword">новый пароль</param>
-        private static void ChangePassword(string NewPassword)
-        {
-            User user = App.DataBase.Users.Where(p => p.Id == InterfaceManagement.ManagementUser.Id).FirstOrDefault();
-            user.Password = PasswordLoginManagement.CreateSHA512(NewPassword);
-            App.DataBase.SaveChanges();
-        }
-
-        /// <summary>
-        /// Проверка совпадения введенного пароля со старым
-        /// </summary>
-        /// <param name="EnteredPassword">введеный пароль</param>
-        /// <returns></returns>
-        private static bool PasswordCheck(string EnteredPassword)
-        {
-            var users = App.DataBase.Users.ToList();
-            EnteredPassword = PasswordLoginManagement.CreateSHA512(EnteredPassword).ToLower();
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (EnteredPassword == users[i].Password)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

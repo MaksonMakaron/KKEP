@@ -21,9 +21,20 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class DisciplinesAddEditPage : Page
     {
+        /// <summary>
+        /// Текущая дисциплина
+        /// </summary>
         private Discipline currentDiscipline = new Discipline();
+
+        /// <summary>
+        /// Текущая дисциплина на каких отделениях
+        /// </summary>
         private List<DisciplineOfDepartment> currentDisOfDep = new List<DisciplineOfDepartment>();
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="discipline">выбранная дисциплина</param>
         public DisciplinesAddEditPage(Discipline discipline)
         {
             InitializeComponent();
@@ -41,11 +52,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             DGridDisciplinesOfDepartment.ItemsSource = currentDisOfDep;
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - сохранение информации
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -65,6 +86,15 @@ namespace SubsystemKKEP.AppPages.Administrator
 
             currentDiscipline.DisciplineOfDepartments = currentDisOfDep;
 
+            foreach (var discipline in App.DataBase.Disciplines.ToList())
+            {
+                if (discipline.DisciplineName == currentDiscipline.DisciplineName)
+                {
+                    MessageBox.Show("Такая дисциплина уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             if (currentDiscipline.Id == 0)
             {
                 App.DataBase.Disciplines.Add(currentDiscipline);
@@ -82,6 +112,11 @@ namespace SubsystemKKEP.AppPages.Administrator
             }
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - добавление информации о дисциплине
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -119,6 +154,11 @@ namespace SubsystemKKEP.AppPages.Administrator
             DGridDisciplinesOfDepartment.Items.Refresh();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - удаление информации о дисциплине
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             var removing = (sender as Button).DataContext as DisciplineOfDepartment;

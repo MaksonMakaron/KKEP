@@ -1,18 +1,11 @@
-﻿using System;
+﻿using SubsystemKKEP.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SubsystemKKEP.Classes;
 
 namespace SubsystemKKEP.AppPages.Teacher
 {
@@ -31,6 +24,10 @@ namespace SubsystemKKEP.AppPages.Teacher
         /// </summary>
         private Mark markCurrent = new Mark();
 
+        /// <summary>
+        /// Загрузка журнала
+        /// </summary>
+        /// <param name="selectedJournal">выбранный журнал и дисциплина</param>
         public GroupJournal(Appointment selectedJournal)
         {
             InitializeComponent();
@@ -45,6 +42,8 @@ namespace SubsystemKKEP.AppPages.Teacher
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
+            InterfaceManagement.ManagementHeaderText.Text = "Учебные журналы";
+            InterfaceManagement.ManagementImgHeader.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/Book.png"));
         }
 
         /// <summary>
@@ -54,28 +53,28 @@ namespace SubsystemKKEP.AppPages.Teacher
         {
             var currentMarks = App.DataBase.Marks.
                 Where(p => p.IdDiscipline == journalCurrent.IdDiscipline).ToList();
-
-            currentMarks = currentMarks.Where(q => q.Student.Group == journalCurrent.Group).ToList();
+            currentMarks = currentMarks.Where(p => p.Student.Group == journalCurrent.Group).ToList();
+            if (CmbSortStudent.SelectedIndex > 0)
+            {
+                currentMarks = currentMarks.Where(p => p.IdStudent == (CmbSortStudent.SelectedItem as Student).Id).ToList();
+            }
 
             if (DpDateMarkSorting.SelectedDate != null)
             {
-                currentMarks = currentMarks.Where(p => p.Date == DpDateMarkSorting.SelectedDate).ToList();
+                currentMarks = currentMarks.Where(p => p.Date == DpDateMarkSorting.SelectedDate).OrderByDescending(p => p.Date).ToList();
             }
 
-            currentMarks = currentMarks.Where(p => p.Student.FullName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
 
-            DGridMarks.ItemsSource = currentMarks;
-            if (DGridMarks.Items.Count == 0)
+            if (currentMarks.Count() > 0)
             {
-                MessageBox.Show($"Отсутсвуют оценки", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-                DGridMarks.IsEnabled = false;
-                TbSearch.IsEnabled = false;
+                PopupSearch.Visibility = Visibility.Collapsed;
             }
             else
             {
-                DGridMarks.IsEnabled = true;
-                TbSearch.IsEnabled = true;
+                PopupSearch.Visibility = Visibility.Visible;
             }
+
+            DGridMarks.ItemsSource = currentMarks.OrderByDescending(p => p.Date);
         }
 
         /// <summary>
@@ -87,16 +86,6 @@ namespace SubsystemKKEP.AppPages.Teacher
         {
             UpdateMarks();
         }
-
-        /// <summary>
-        /// По нажатию на кнопку - переход на страницу с добавлением новой оценки
-        /// </summary>
-        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
-        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
-        private void BtnAddMark_Click(object sender, RoutedEventArgs e)
-        {
-            //InterfaceManagement.ManagementPage.Navigate(new MarkEditing(null, journalCurrent));
-        }
         
         /// <summary>
         /// По нажатию кнопки - удаление оценок
@@ -106,7 +95,11 @@ namespace SubsystemKKEP.AppPages.Teacher
         private void BtnDeleteMark_Click(object sender, RoutedEventArgs e)
         {
             var marksRemoving = DGridMarks.SelectedItems.Cast<Mark>().ToList();
-
+            if (marksRemoving.Count == 0)
+            {
+                MessageBox.Show("Выберите оценки для удаления", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
             if (MessageBox.Show($"Вы точно хотите удалить {marksRemoving.Count} оценок?", 
                 "Подтверждение удаления", MessageBoxButton.YesNo, 
                 MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -126,7 +119,7 @@ namespace SubsystemKKEP.AppPages.Teacher
         }
 
         /// <summary>
-        /// По нажатию на кнопку - переход на страницу с редактированием выбранной оценки
+        /// По нажатию на кнопку - редактирование выбранной оценки
         /// </summary>
         /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
@@ -134,12 +127,13 @@ namespace SubsystemKKEP.AppPages.Teacher
         {
             markCurrent = (sender as Button).DataContext as Mark;
             GbMark.DataContext = markCurrent;
-            DpDateMark.SelectedDate = DateTime.Now;
-            //InterfaceManagement.ManagementPage.Navigate(new MarkEditing((sender as Button).DataContext as Mark, journalCurrent));
+            TextAddOrEdit.Text = "Сохранить";
+            ImgBtn.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/Edit.png"));
+            GbMark.Header = "Редактирование оценки";
         }
 
         /// <summary>
-        /// При загрузки страницы - обновление оценок
+        /// При загрузки страницы - обновление данных
         /// </summary>
         /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
@@ -149,47 +143,15 @@ namespace SubsystemKKEP.AppPages.Teacher
             CmbMark.ItemsSource = GenerationMarks();
             var students = App.DataBase.Students.Where(p => p.Group.Id == journalCurrent.IdGroup).ToList();
             CmbStudent.ItemsSource = students;
-            BtnAddMark.ToolTip = "Внимание!";
+            var studentsSort = App.DataBase.Students.Where(p => p.Group.Id == journalCurrent.IdGroup).ToList();
+            studentsSort.Insert(0, new Student
+            {
+                LastName = "Все студенты",
+                FirstName = " "
+            });
+            CmbSortStudent.ItemsSource = studentsSort;
+            CmbSortStudent.SelectedIndex = 0;
             UpdateMarks();
-        }
-
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            StringBuilder errors = new StringBuilder();
-            if (CmbStudent.SelectedIndex == -1)
-            {
-                errors.AppendLine("Выберите студента");
-            }
-            if (CmbMark.SelectedIndex == -1)
-            {
-                errors.AppendLine("Выберите оценку");
-            }
-            if (DpDateMark.SelectedDate == null)
-            {
-                errors.AppendLine("Выберите дату");
-            }
-            if (errors.Length > 0)
-            {
-                MessageBox.Show(errors.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            if (markCurrent.Id == 0)
-            {
-                App.DataBase.Marks.Add(markCurrent);
-            }
-
-            App.DataBase.SaveChanges();
-            MessageBox.Show($"Информация сохранена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-            UpdateMarks();
-            CmbStudent.SelectedIndex = -1;
-            CmbMark.SelectedIndex = -1;
-            DpDateMark.SelectedDate = DateTime.Now;
-        }
-
-        private void BtnHelp_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("","Справка", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -214,6 +176,99 @@ namespace SubsystemKKEP.AppPages.Teacher
         /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void DpDateMarkSorting_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateMarks();
+        }
+
+        /// <summary>
+        /// Сброс значений при редактировании/добавлении оценки
+        /// </summary>
+        public void Reset()
+        {
+            markCurrent = new Mark();
+            GbMark.DataContext = null;
+            CmbStudent.SelectedIndex = -1;
+            CmbMark.SelectedIndex = -1;
+            DpDateMark.SelectedDate = null;
+            TextAddOrEdit.Text = "Добавить";
+            GbMark.Header = "Добавление оценки";
+            ImgBtn.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/Add.png"));
+        }
+
+        /// <summary>
+        /// По нажатию на кнопку - сброс данных при добавлении/редактировании оценки
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            Reset();
+        }
+
+        /// <summary>
+        /// При нажатии на кнопку - сохранение данных (добавление оценки/редкатирование)
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
+        private void BtnSaveOrAdd_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder errors = new StringBuilder();
+            if (CmbStudent.SelectedIndex == -1)
+            {
+                errors.AppendLine("Выберите студента");
+            }
+            if (CmbMark.SelectedIndex == -1)
+            {
+                errors.AppendLine("Выберите оценку");
+            }
+            if (DpDateMark.SelectedDate == null)
+            {
+                errors.AppendLine("Выберите дату");
+            }
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (markCurrent.Id == 0)
+            {
+                Mark mark = new Mark
+                {
+                    Discipline = journalCurrent.Discipline,
+                    IdDiscipline = journalCurrent.IdDiscipline,
+                    IdUser = journalCurrent.IdUser,
+                    User = journalCurrent.User,
+                    Date = (DateTime)DpDateMark.SelectedDate,
+                    IdStudent = (CmbStudent.SelectedItem as Student).Id,
+                    MarkValue = CmbMark.SelectedItem.ToString(),
+                    Student = CmbStudent.SelectedItem as Student,
+                };
+                App.DataBase.Marks.Add(mark);
+            }
+
+            Reset();
+            try
+            {
+                App.DataBase.SaveChanges();
+                MessageBox.Show($"Информация сохранена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            UpdateMarks();
+            CmbStudent.SelectedIndex = -1;
+            CmbMark.SelectedIndex = -1;
+            DpDateMark.SelectedDate = null;
+        }
+
+        /// <summary>
+        /// При выборе определенного студента - оценки отображаются этого студента
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
+        private void CmbSortStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateMarks();
         }

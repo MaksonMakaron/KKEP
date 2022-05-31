@@ -26,6 +26,7 @@ namespace SubsystemKKEP.Classes
         public string GroupNumber { get; set; }
         public string CourseOfStudy { get; set; }
         public int IdSpecialization { get; set; }
+        public bool IsArchive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointments { get; set; }

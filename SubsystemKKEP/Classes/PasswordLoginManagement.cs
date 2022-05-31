@@ -9,6 +9,9 @@ using System.Windows.Controls;
 
 namespace SubsystemKKEP.Classes
 {
+    /// <summary>
+    /// Класс для управления логинами и паролями
+    /// </summary>
     public class PasswordLoginManagement
     {
         /// <summary>
@@ -72,6 +75,36 @@ namespace SubsystemKKEP.Classes
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Проверка совпадения введенного пароля со старым
+        /// </summary>
+        /// <param name="EnteredPassword">введеный пароль</param>
+        /// <returns></returns>
+        public static bool PasswordCheck(string EnteredPassword)
+        {
+            var users = App.DataBase.Users.ToList();
+            EnteredPassword = PasswordLoginManagement.CreateSHA512(EnteredPassword).ToLower();
+            for (int i = 0; i < users.Count; i++)
+            {
+                if (EnteredPassword == users[i].Password)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Смена пароля
+        /// </summary>
+        /// <param name="NewPassword">новый пароль</param>
+        public static void ChangePassword(string NewPassword)
+        {
+            User user = App.DataBase.Users.Where(p => p.Id == InterfaceManagement.ManagementUser.Id).FirstOrDefault();
+            user.Password = PasswordLoginManagement.CreateSHA512(NewPassword);
+            App.DataBase.SaveChanges();
         }
     }
 }

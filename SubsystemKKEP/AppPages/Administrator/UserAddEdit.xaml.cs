@@ -21,7 +21,15 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class UserAddEdit : Page
     {
+        /// <summary>
+        /// Текущий пользователь
+        /// </summary>
         private User currentUser = new User();
+
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="user">пользователь, который может редактироваться</param>
         public UserAddEdit(User user)
         {
             InitializeComponent();
@@ -36,11 +44,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             DataContext = currentUser;
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - возврат на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - сохранение информации о пользователе
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(TbUserName.Text) && CmbRole.SelectedIndex != -1)
@@ -94,11 +112,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             }
         }
 
+        /// <summary>
+        /// При нажатии кнопки мыши - пароль показывается 
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSeePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             PasswordLoginManagement.SeePasswordPreviewMouseDown(TbPassword, PbPassword);
         }
 
+        /// <summary>
+        /// При нажатии кнопки мыши - пароль скрывается 
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSeePassword_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             PasswordLoginManagement.SeePasswordPreviewMouseUp(TbPassword, PbPassword);

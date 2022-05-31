@@ -10,6 +10,9 @@ using System.Windows.Controls;
 
 namespace SubsystemKKEP.Classes
 {
+    /// <summary>
+    /// Класс для управления интерфейсом
+    /// </summary>
     public class InterfaceManagement
     {
         /// <summary>
@@ -41,8 +44,6 @@ namespace SubsystemKKEP.Classes
         /// Свойство для управления входом
         /// </summary>
         public static LogIn LogInUser { get; set; }
-
-        
 
         /// <summary>
         /// Выход из аккаунта. Очистка свойств

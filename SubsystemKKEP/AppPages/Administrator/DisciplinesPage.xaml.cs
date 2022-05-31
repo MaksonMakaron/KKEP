@@ -21,11 +21,17 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class DisciplinesPage : Page
     {
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
         public DisciplinesPage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обновление списка дисциплин
+        /// </summary>
         private void UpdateDiscipline()
         {
             var currentDiscipline = App.DataBase.Disciplines.ToList();
@@ -41,11 +47,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             DGridDisciplines.ItemsSource = currentDiscipline.OrderBy(p => p.DisciplineName);
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на страницу с добавлением дисциплины
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnAddDiscipline_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.Navigate(new DisciplinesAddEditPage(null));
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - удаление дисциплин
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnDeleteDiscipline_Click(object sender, RoutedEventArgs e)
         {
             var disciplinesRemoving = DGridDisciplines.SelectedItems.Cast<Discipline>().ToList();
@@ -72,26 +88,51 @@ namespace SubsystemKKEP.AppPages.Administrator
             }
         }
 
+        /// <summary>
+        /// При изменении содержимого TextBox - обновление списка дисциплин
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateDiscipline();
         }
 
+        /// <summary>
+        /// При изменении выбранного отделения - обновление списка дисциплин
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void CmbSortDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateDiscipline();
         }
 
+        /// <summary>
+        /// При изменении выбранного курса - обновление списка дисциплин
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void CmbSortCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateDiscipline();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на страницу с редактированием дисциплины
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnEditDiscipline_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.Navigate(new DisciplinesAddEditPage((sender as Button).DataContext as Discipline));
         }
 
+        /// <summary>
+        /// При загрузке страницы - обновление данных
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             UpdateDiscipline();

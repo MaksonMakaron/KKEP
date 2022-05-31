@@ -21,11 +21,17 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class SpecialtiesPage : Page
     {
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
         public SpecialtiesPage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обновление списка специальностей
+        /// </summary>
         private void UpdateSpecialization()
         {
             var currentSpecialization = App.DataBase.Specializations.ToList();
@@ -48,11 +54,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             DGridSpecializations.ItemsSource = currentSpecialization.OrderBy(p => p.SpecializationOfName);
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - переход на страницу с добавлением специальности
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnAddSpecialization_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.Navigate(new SpecialtieAddEditPage(null));
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - удаление специальностей
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnDeleteSpecialization_Click(object sender, RoutedEventArgs e)
         {
             var specializationsRemoving = DGridSpecializations.SelectedItems.Cast<Specialization>().ToList();
@@ -79,21 +95,41 @@ namespace SubsystemKKEP.AppPages.Administrator
             }
         }
 
+        /// <summary>
+        /// При изменении содержимого TextBox - обновление списка специальностей
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSpecialization();
         }
 
+        /// <summary>
+        /// При изменении выбранного пункта - обновление списка специальностей
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void CmbSortDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateSpecialization();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на страницу с редактированием специальности
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnEditSpecialization_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.Navigate(new SpecialtieAddEditPage((sender as Button).DataContext as Specialization));
         }
 
+        /// <summary>
+        /// При загрузке страницы - обновление данных
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var allDepartments = App.DataBase.Departments.ToList();

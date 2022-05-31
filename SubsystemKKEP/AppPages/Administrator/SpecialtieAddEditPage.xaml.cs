@@ -21,7 +21,15 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class SpecialtieAddEditPage : Page
     {
+        /// <summary>
+        /// Текущая специальность
+        /// </summary>
         private Specialization currentSpecialization = new Specialization();
+
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="specialization">выбранная специальность</param>
         public SpecialtieAddEditPage(Specialization specialization)
         {
             InitializeComponent();
@@ -33,11 +41,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             DataContext = currentSpecialization;
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - сохранение информации
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -59,6 +77,15 @@ namespace SubsystemKKEP.AppPages.Administrator
             {
                 MessageBox.Show(errors.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            }
+
+            foreach (var specialization in App.DataBase.Specializations.ToList())
+            {
+                if (specialization.SpecializationOfName == currentSpecialization.SpecializationOfName || specialization.ShortName == currentSpecialization.ShortName)
+                {
+                    MessageBox.Show("Такая специальность уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
 
             if (currentSpecialization.Id == 0)

@@ -21,8 +21,15 @@ namespace SubsystemKKEP.AppPages.Administrator
     /// </summary>
     public partial class AppointmentAddEditPage : Page
     {
+        /// <summary>
+        /// Текущее назначение
+        /// </summary>
         private Appointment currentAppointment = new Appointment();
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="appointment">выбранное назначение</param>
         public AppointmentAddEditPage(Appointment appointment)
         {
             InitializeComponent();
@@ -36,11 +43,21 @@ namespace SubsystemKKEP.AppPages.Administrator
             DataContext = currentAppointment;
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - сохранение информации
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();

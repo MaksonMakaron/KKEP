@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e66c0e251f094df0bd6f4f4c3f14b444" Name="Diagram1">
+      <Diagram DiagramId="b8b43f3179654d39bf03adb51cbd37fb" Name="Diagram1">
         <EntityTypeShape EntityType="DB_KKEPModel.Appointment" Width="1.5" PointX="12" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_KKEPModel.Department" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_KKEPModel.Discipline" Width="1.5" PointX="9.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_KKEPModel.DisciplineOfDepartment" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.Group" Width="1.5" PointX="9.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_KKEPModel.LogIn" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.Group" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_KKEPModel.LogIn" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_KKEPModel.Mark" Width="1.5" PointX="14.25" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_KKEPModel.Role" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_KKEPModel.Specialization" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />

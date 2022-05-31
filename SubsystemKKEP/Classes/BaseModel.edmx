@@ -49,6 +49,7 @@
           <Property Name="GroupNumber" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="CourseOfStudy" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdSpecialization" Type="int" Nullable="false" />
+          <Property Name="IsArchive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="LogIn">
           <Key>
@@ -429,6 +430,7 @@
           <Property Name="GroupNumber" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CourseOfStudy" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="IdSpecialization" Type="Int32" Nullable="false" />
+          <Property Name="IsArchive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointment_Group" FromRole="Group" ToRole="Appointment" />
           <NavigationProperty Name="Specialization" Relationship="Self.FK_Group_Specialization" FromRole="Group" ToRole="Specialization" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Student_Group" FromRole="Group" ToRole="Student" />
@@ -815,6 +817,7 @@
                 <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
                 <ScalarProperty Name="CourseOfStudy" ColumnName="CourseOfStudy" />
                 <ScalarProperty Name="IdSpecialization" ColumnName="IdSpecialization" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
