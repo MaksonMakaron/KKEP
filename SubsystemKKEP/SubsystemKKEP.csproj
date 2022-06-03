@@ -114,6 +114,21 @@
     <Compile Include="AppPages\Administrator\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppPages\Department\ChartsAcademicPage.xaml.cs">
+      <DependentUpon>ChartsAcademicPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppPages\Department\GroupDisciplinePage.xaml.cs">
+      <DependentUpon>GroupDisciplinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppPages\Department\GroupJournalDisciplinePage.xaml.cs">
+      <DependentUpon>GroupJournalDisciplinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppPages\Department\GroupsJournalsPage.xaml.cs">
+      <DependentUpon>GroupsJournalsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppPages\Department\ReportCardPage.xaml.cs">
+      <DependentUpon>ReportCardPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AppPages\PasswordChange.xaml.cs">
       <DependentUpon>PasswordChange.xaml</DependentUpon>
     </Compile>
@@ -279,6 +294,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AppPages\Department\ChartsAcademicPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppPages\Department\GroupDisciplinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppPages\Department\GroupJournalDisciplinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppPages\Department\GroupsJournalsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppPages\Department\ReportCardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AppPages\PasswordChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -375,9 +410,7 @@
     <Resource Include="Resources\Users_Edit.png" />
     <Resource Include="Resources\Word.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppPages\Department\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Classes\BaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
