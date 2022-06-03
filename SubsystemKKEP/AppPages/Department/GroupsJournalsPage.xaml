@@ -14,7 +14,7 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Rectangle Grid.Row="0" Fill="#D3F2FF"></Rectangle>
+            <Grid Grid.Row="0" Background="#D3F2FF"></Grid>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
