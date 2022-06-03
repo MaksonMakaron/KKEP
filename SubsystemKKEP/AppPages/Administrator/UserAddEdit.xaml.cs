@@ -27,7 +27,7 @@ namespace SubsystemKKEP.AppPages.Administrator
         private User currentUser = new User();
 
         /// <summary>
-        /// Загрузка страницы
+        /// Загрузка страницыы
         /// </summary>
         /// <param name="user">пользователь, который может редактироваться</param>
         public UserAddEdit(User user)
