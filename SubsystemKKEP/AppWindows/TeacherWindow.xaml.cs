@@ -41,8 +41,9 @@ namespace SubsystemKKEP.AppWindows
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSignOut_Click(object sender, RoutedEventArgs e)
         {
-            if (InterfaceManagement.SignOut())
+            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.OK)
             {
+                InterfaceManagement.SignOut();
                 this.Close();
             }
         }

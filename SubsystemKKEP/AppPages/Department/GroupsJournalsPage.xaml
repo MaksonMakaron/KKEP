@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SubsystemKKEP.AppPages.Department"
       mc:Ignorable="d" 
-      Title="GroupsJournalsPage">
+      Title="GroupsJournalsPage" IsVisibleChanged="Page_IsVisibleChanged">
 
     <Border CornerRadius="0 20 20 0"
             Background="White">
@@ -47,17 +47,17 @@
                                     BorderBrush="#FFABADB3"
                                     CornerRadius="5"
                                     Padding="3,1"
-                                    Width="710"
+                                    Width="370"
                                     Margin="10"
-                                    ToolTip="Поиск по ФИО преподавателя">
+                                    ToolTip="Поиск по номеру группы">
                                 <StackPanel Orientation="Horizontal"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center">
                                     <TextBox x:Name="TbSearch"
                                              Margin="0"
-                                             MaxLength="30"
+                                             MaxLength="5"
                                              HorizontalContentAlignment="Left"
-                                             Width="670"
+                                             Width="330"
                                              TabIndex="1"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
@@ -65,43 +65,64 @@
                                            Style="{StaticResource IconButton}"></Image>
                                 </StackPanel>
                             </Border>
-                            <ComboBox x:Name="CmbSortGroup"
-                                      Width="300"
-                                      ToolTip="Сортировка по группе"
-                                      DisplayMemberPath="GroupName"
-                                      SelectionChanged="CmbSortGroup_SelectionChanged"></ComboBox>
+                            <ComboBox x:Name="CmbSortCourse"
+                                      Width="170"
+                                      ToolTip="Сортировка по курсу"
+                                      Margin="5 0"
+                                      SelectionChanged="CmbSortCourse_SelectionChanged"></ComboBox>
+                            <ComboBox x:Name="CmbSortSpecialization"
+                                      Width="250"
+                                      Margin="5 0"
+                                      ToolTip="Сортировка по специальности"
+                                      DisplayMemberPath="ShortName"
+                                      SelectionChanged="CmbSortSpecialization_SelectionChanged"></ComboBox>
                         </StackPanel>
                     </StackPanel>
 
                 </GroupBox>
-                <DataGrid x:Name="DGridAppointments"
+                <DataGrid x:Name="DGridGroups"
                           MinHeight="450"
                           MaxHeight="450"
                           HorizontalAlignment="Center"
                           HorizontalContentAlignment="Center"
-                          MaxWidth="1040"
+                          MaxWidth="840"
                           AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="300"
-                                            Binding="{Binding User.UserName}">
-                            <DataGridTextColumn.Header>Преподаватель</DataGridTextColumn.Header>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Width="150"
-                                            Binding="{Binding Group.GroupName}">
+                        <DataGridTextColumn Width="*"
+                                            Binding="{Binding GroupName}">
                             <DataGridTextColumn.Header>Группа</DataGridTextColumn.Header>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="*"
-                                            Binding="{Binding Discipline.DisciplineName}">
-                            <DataGridTextColumn.Header>Дисциплина</DataGridTextColumn.Header>
+                        <DataGridTextColumn Width="150"
+                                            Binding="{Binding CourseOfStudy}">
+                            <DataGridTextColumn.Header>Курс</DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="200"
+                                            Binding="{Binding Specialization.ShortName}">
+                            <DataGridTextColumn.Header>Специальность</DataGridTextColumn.Header>
                         </DataGridTextColumn>
                         <DataGridTemplateColumn Width="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="BtnEditAppointment"
-                                            Click="BtnEditAppointment_Click"
+                                    <Button x:Name="BtnOpenJournals"
+                                            Click="BtnOpenJournals_Click"
                                             Style="{StaticResource BtnTaskBar}">
                                         <Button.Content>
-                                            <Image Source="/SubsystemKKEP;component/Resources/Edit.png"
+                                            <Image Source="/SubsystemKKEP;component/Resources/Open_Book.png"
+                                                   Style="{StaticResource IconButton}"
+                                                   Width="20"></Image>
+                                        </Button.Content>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="BtnReportCard"
+                                            Click="BtnReportCard_Click"
+                                            Style="{StaticResource BtnTaskBar}">
+                                        <Button.Content>
+                                            <Image Source="/SubsystemKKEP;component/Resources/Document.png"
                                                    Style="{StaticResource IconButton}"
                                                    Width="20"></Image>
                                         </Button.Content>

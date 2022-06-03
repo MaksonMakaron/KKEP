@@ -117,11 +117,8 @@
     <Compile Include="AppPages\Department\ChartsAcademicPage.xaml.cs">
       <DependentUpon>ChartsAcademicPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppPages\Department\GroupDisciplinePage.xaml.cs">
-      <DependentUpon>GroupDisciplinePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AppPages\Department\GroupJournalDisciplinePage.xaml.cs">
-      <DependentUpon>GroupJournalDisciplinePage.xaml</DependentUpon>
+    <Compile Include="AppPages\Department\CurrentJournalPage.xaml.cs">
+      <DependentUpon>CurrentJournalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppPages\Department\GroupsJournalsPage.xaml.cs">
       <DependentUpon>GroupsJournalsPage.xaml</DependentUpon>
@@ -298,11 +295,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AppPages\Department\GroupDisciplinePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AppPages\Department\GroupJournalDisciplinePage.xaml">
+    <Page Include="AppPages\Department\CurrentJournalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

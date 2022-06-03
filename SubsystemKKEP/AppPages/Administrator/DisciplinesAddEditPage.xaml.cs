@@ -135,9 +135,9 @@ namespace SubsystemKKEP.AppPages.Administrator
             }
             var currentDepOfCourse = new DisciplineOfDepartment
             {
-                IdDepartment = (CmbDepartment.SelectedItem as Department).Id,
+                IdDepartment = (CmbDepartment.SelectedItem as Classes.Department).Id,
                 CourseOfStudy = CmbCourse.SelectedItem as string,
-                Department = CmbDepartment.SelectedItem as Department,
+                Department = CmbDepartment.SelectedItem as Classes.Department,
                 Discipline = currentDiscipline,
                 IdDiscipline = currentDiscipline.Id
             };

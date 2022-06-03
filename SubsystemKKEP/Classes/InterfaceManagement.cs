@@ -49,18 +49,13 @@ namespace SubsystemKKEP.Classes
         /// Выход из аккаунта. Очистка свойств
         /// </summary>
         /// <returns>true - пользователь вышел, false - пользователь не вышел</returns>
-        public static bool SignOut()
+        public static void SignOut()
         {
-            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
-            {
-                Authorization authorization = new Authorization();
-                authorization.Show();
-                ManagementUser = null;
-                ManagementWindow = null;
-                LogInUser = null;
-                return true;
-            }
-            return false;
+            Authorization authorization = new Authorization();
+            authorization.Show();
+            ManagementUser = null;
+            ManagementWindow = null;
+            LogInUser = null;
         }
     }
 }

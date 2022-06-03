@@ -48,7 +48,7 @@ namespace SubsystemKKEP.AppPages.Administrator
 
             if (CmbSortDepartment.SelectedIndex > 0)
             {
-                currentGroups = currentGroups.Where(p => p.Specialization.Department == CmbSortDepartment.SelectedItem as Department).ToList();
+                currentGroups = currentGroups.Where(p => p.Specialization.Department == CmbSortDepartment.SelectedItem as Classes.Department).ToList();
             }
 
             if (CbSortIsArchive.IsChecked.Value)
@@ -163,7 +163,7 @@ namespace SubsystemKKEP.AppPages.Administrator
             CmbSortSpecialization.ItemsSource = specialization;
             CmbSortSpecialization.SelectedIndex = 0;
             var department = App.DataBase.Departments.ToList();
-            department.Insert(0, new Department
+            department.Insert(0, new Classes.Department
             {
                 DepartmentName = "Все отделения"
             });

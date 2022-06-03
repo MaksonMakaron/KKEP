@@ -38,7 +38,7 @@ namespace SubsystemKKEP.AppPages.Administrator
 
             if (CmbSortDepartment.SelectedIndex > 0)
             {
-                currentSpecialization = currentSpecialization.Where(p => p.Department == (CmbSortDepartment.SelectedItem as Department)).ToList();
+                currentSpecialization = currentSpecialization.Where(p => p.Department == (CmbSortDepartment.SelectedItem as Classes.Department)).ToList();
             }
 
             currentSpecialization = currentSpecialization.Where(p => p.SpecializationOfName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
@@ -133,7 +133,7 @@ namespace SubsystemKKEP.AppPages.Administrator
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var allDepartments = App.DataBase.Departments.ToList();
-            allDepartments.Insert(0, new Department
+            allDepartments.Insert(0, new Classes.Department
             {
                 DepartmentName = "Все отделения"
             });

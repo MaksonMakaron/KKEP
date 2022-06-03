@@ -1,4 +1,6 @@
-﻿using SubsystemKKEP.Classes;
+﻿using SubsystemKKEP.AppPages;
+using SubsystemKKEP.AppPages.Department;
+using SubsystemKKEP.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +41,9 @@ namespace SubsystemKKEP.AppWindows
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnSignOut_Click(object sender, RoutedEventArgs e)
         {
-            if (InterfaceManagement.SignOut())
+            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation) == MessageBoxResult.OK)
             {
+                InterfaceManagement.SignOut();
                 this.Close();
             }
         }
@@ -54,6 +57,7 @@ namespace SubsystemKKEP.AppWindows
         {
             InterfaceManagement.ManagementHeaderText.Text = "Успеваемость";
             InterfaceManagement.ManagementImgHeader.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/Analis.png"));
+            InterfaceManagement.ManagementPage.Navigate(new GroupsJournalsPage());
         }
 
         /// <summary>
@@ -64,7 +68,8 @@ namespace SubsystemKKEP.AppWindows
         private void BtnAccount_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementHeaderText.Text = "Личный кабинет";
-            InterfaceManagement.ManagementImgHeader.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/Book.png"));
+            InterfaceManagement.ManagementImgHeader.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Resources/User.png"));
+            InterfaceManagement.ManagementPage.Navigate(new Account());
         }
     }
 }

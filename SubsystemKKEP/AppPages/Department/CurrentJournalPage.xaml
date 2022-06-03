@@ -1,0 +1,123 @@
+﻿<Page x:Class="SubsystemKKEP.AppPages.Department.CurrentJournalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SubsystemKKEP.AppPages.Department"
+      mc:Ignorable="d" 
+      Title="CurrentJournalPage" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Border CornerRadius="0 20 20 0"
+            Background="White">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Background="#D3F2FF"
+                        Grid.Row="0">
+                <Button x:Name="BtnBack"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnBack_Click">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Back.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1">
+                <ComboBox x:Name="CmbDiscipline"
+                          DisplayMemberPath="Discipline.DisciplineName"
+                          Margin="0 15"
+                          Width="510"
+                          ToolTip="Выберите дисциплину"
+                          SelectionChanged="CmbDiscipline_SelectionChanged"></ComboBox>
+                <TextBlock Text="Преподаватель: {выберите дисциплину}"
+                           FontWeight="Bold"
+                           x:Name="TextTeacher"
+                           Margin="10"
+                           HorizontalAlignment="Center"></TextBlock>
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal"
+                                x:Name="SpBinding"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Center"
+                                Margin="0 0 0 10">
+                        <GroupBox Header="Сортировка"
+                                  Margin="5 0">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical"
+                                            Visibility="Collapsed"
+                                            x:Name="PopupSearch"
+                                            HorizontalAlignment="Center">
+                                    <Image Source="/SubsystemKKEP;component/Resources/Info.png"
+                                           Style="{StaticResource IconButton}"
+                                           Width="40"></Image>
+                                    <TextBlock Text="Ничего не найдено :("
+                                               FontSize="16"
+                                               FontFamily="Segoe UI"></TextBlock>
+                                </StackPanel>
+                                <ComboBox x:Name="CmbSortStudent"
+                                          DisplayMemberPath="ShortName"
+                                          Margin="0 15"
+                                          Width="270"
+                                          ToolTip="Сортировка по студенту"
+                                          SelectionChanged="CmbSortStudent_SelectionChanged"></ComboBox>
+                                <Border Background="White"
+                                        BorderThickness="0.5"
+                                        BorderBrush="#FFABADB3"
+                                        CornerRadius="5"
+                                        Height="35"
+                                        ToolTip="Выберите дату для отображения оценок"
+                                        Padding="3,1"
+                                        Margin="10">
+                                    <StackPanel Orientation="Horizontal"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center">
+                                        <DatePicker x:Name="DpDateMarkSorting"
+                                                    SelectedDateChanged="DpDateMarkSorting_SelectedDateChanged"
+                                                    Height="auto"
+                                                    Width="200">
+                                        </DatePicker>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                    <DataGrid x:Name="DGridMarks"
+                                  MinHeight="400"
+                                  Grid.Column="1"
+                                  Margin="15 0"
+                                  VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  HorizontalContentAlignment="Center"
+                                  MaxWidth="720"
+                                  AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="230"
+                                                    Binding="{Binding Student.ShortName}">
+                                <DataGridTextColumn.Header>ФИО</DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="200"
+                                                    Binding="{Binding Date, StringFormat=dd.MM.yyyy}">
+                                <DataGridTextColumn.Header>Дата</DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Width="70"
+                                                    Binding="{Binding MarkValue}">
+                                <DataGridTextColumn.Header>Оценка</DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Page>
