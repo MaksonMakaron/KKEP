@@ -23,8 +23,6 @@ namespace SubsystemKKEP.AppPages.Department
     {
         private Group currentGroup = new Group();
 
-        private List<Appointment> currentDisciplines = new List<Appointment>();
-
         public CurrentJournalPage(Group group)
         {
             InitializeComponent();
@@ -57,12 +55,11 @@ namespace SubsystemKKEP.AppPages.Department
             {
                 marks = marks.Where(p => p.Date == DpDateMarkSorting.SelectedDate).ToList();
             }
+            DGridMarks.ItemsSource = marks;
             if (marks.Count == 0)
             {
                 MessageBox.Show("Отсутствуют оценки", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
             }
-            DGridMarks.ItemsSource = marks;
         }
 
         private void CmbDiscipline_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,9 +84,26 @@ namespace SubsystemKKEP.AppPages.Department
 
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
+            if (Visibility == Visibility.Visible && InterfaceManagement.ManagementUser != null)
             {
-                var currentDisciplines = App.DataBase.Appointments.Where(p => p.IdGroup == currentGroup.Id).ToList();
+                //SELECT* FROM Discipline d
+                //INNER JOIN DisciplineOfDepartment disOfdep ON disOfdep.IdDiscipline = d.Id
+                //WHERE disOfdep.CourseOfStudy = '3' AND disOfdep.IdDepartment = 1
+                var appointments = App.DataBase.Appointments.Where(p => p.IdGroup == currentGroup.Id).ToList();
+                var currentDisciplines = new List<Appointment>();
+                foreach (var disOfDep in App.DataBase.DisciplineOfDepartments.ToList())
+                {
+                    foreach (var appointment in appointments)
+                    {
+                        if (appointment.IdDiscipline == disOfDep.IdDiscipline 
+                            && disOfDep.CourseOfStudy == currentGroup.CourseOfStudy 
+                            && disOfDep.Department.User.Id == InterfaceManagement.ManagementUser.Id)
+                        {
+                            currentDisciplines.Add(appointment);
+                        }
+                    }
+                }
+
                 currentDisciplines.Insert(0, new Appointment
                 {
                     Discipline = new Discipline
