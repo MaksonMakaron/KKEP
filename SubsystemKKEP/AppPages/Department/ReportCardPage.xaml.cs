@@ -24,5 +24,30 @@ namespace SubsystemKKEP.AppPages.Department
         {
             InitializeComponent();
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAnalis_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnPDF_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnWord_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnExcel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

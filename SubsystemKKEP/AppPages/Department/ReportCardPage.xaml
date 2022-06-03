@@ -4,11 +4,72 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SubsystemKKEP.AppPages.Department"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      mc:Ignorable="d"
       Title="ReportCardPage">
+    <Border CornerRadius="0 20 20 0"
+            Background="White">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Background="#D3F2FF"
+                        Grid.Row="0">
+                <Button x:Name="BtnBack"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnBack_Click"
+                        ToolTip="Назад">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Back.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="BtnAnalis"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnAnalis_Click"
+                        ToolTip="Просмотр анализа (графики)">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Analis.png"
+                               Height="23"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="BtnPDF"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnPDF_Click"
+                        ToolTip="Экспорт в PDF">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/PDF.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="BtnWord"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnWord_Click"
+                        ToolTip="Экспорт в Word">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Word.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="BtnExcel"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnExcel_Click"
+                        ToolTip="Экспорт в Excel">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Excel.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Grid.Row="1">
+            </StackPanel>
+        </Grid>
+    </Border>
 
-    <Grid>
-        
-    </Grid>
 </Page>
