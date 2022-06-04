@@ -97,7 +97,7 @@ namespace SubsystemKKEP.AppPages.Department
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnReportCard_Click(object sender, RoutedEventArgs e)
         {
-
+            InterfaceManagement.ManagementPage.Navigate(new ReportCardPage((sender as Button).DataContext as Group));
         }
 
         /// <summary>

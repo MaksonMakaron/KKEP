@@ -241,7 +241,7 @@ namespace SubsystemKKEP.AppPages.Teacher
                     User = journalCurrent.User,
                     Date = (DateTime)DpDateMark.SelectedDate,
                     IdStudent = (CmbStudent.SelectedItem as Student).Id,
-                    MarkValue = CmbMark.SelectedItem.ToString(),
+                    MarkValue = Convert.ToInt32(CmbMark.SelectedItem),
                     Student = CmbStudent.SelectedItem as Student,
                 };
                 App.DataBase.Marks.Add(mark);

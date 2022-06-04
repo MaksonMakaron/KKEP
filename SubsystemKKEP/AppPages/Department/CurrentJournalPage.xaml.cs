@@ -86,9 +86,6 @@ namespace SubsystemKKEP.AppPages.Department
         {
             if (Visibility == Visibility.Visible && InterfaceManagement.ManagementUser != null)
             {
-                //SELECT* FROM Discipline d
-                //INNER JOIN DisciplineOfDepartment disOfdep ON disOfdep.IdDiscipline = d.Id
-                //WHERE disOfdep.CourseOfStudy = '3' AND disOfdep.IdDepartment = 1
                 var appointments = App.DataBase.Appointments.Where(p => p.IdGroup == currentGroup.Id).ToList();
                 var currentDisciplines = new List<Appointment>();
                 foreach (var disOfDep in App.DataBase.DisciplineOfDepartments.ToList())

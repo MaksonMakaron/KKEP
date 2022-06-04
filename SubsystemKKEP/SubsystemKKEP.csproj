@@ -123,6 +123,9 @@
     <Compile Include="AppPages\Department\GroupsJournalsPage.xaml.cs">
       <DependentUpon>GroupsJournalsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppPages\Department\ReportCardConcreteStudentPage.xaml.cs">
+      <DependentUpon>ReportCardConcreteStudentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AppPages\Department\ReportCardPage.xaml.cs">
       <DependentUpon>ReportCardPage.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AppPages\Department\ReportCardConcreteStudentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AppPages\Department\ReportCardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -403,7 +410,6 @@
     <Resource Include="Resources\Users_Edit.png" />
     <Resource Include="Resources\Word.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Classes\BaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -415,6 +421,8 @@
       <DependentUpon>BaseModel.edmx</DependentUpon>
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\Reset.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

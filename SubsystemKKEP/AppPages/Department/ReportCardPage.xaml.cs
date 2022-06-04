@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SubsystemKKEP.Classes;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,14 +21,24 @@ namespace SubsystemKKEP.AppPages.Department
     /// </summary>
     public partial class ReportCardPage : Page
     {
-        public ReportCardPage()
+        private Group currentGroup = new Group();
+
+        public ReportCardPage(Group group)
         {
             InitializeComponent();
+            currentGroup = group;
+            TextGroup.Text = $"Студенты группы: {currentGroup.GroupName}";
+            if (currentGroup.Students.Count == 0)
+            {
+                MessageBox.Show("Отсутствуют студенты. Обратитесь к администратору");
+                return;
+            }
+            DGridGroups.ItemsSource = currentGroup.Students.ToList();
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            InterfaceManagement.ManagementPage.GoBack();
         }
 
         private void BtnAnalis_Click(object sender, RoutedEventArgs e)
@@ -48,6 +59,11 @@ namespace SubsystemKKEP.AppPages.Department
         private void BtnExcel_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnOpenReportCard_Click(object sender, RoutedEventArgs e)
+        {
+            InterfaceManagement.ManagementPage.Navigate(new ReportCardConcreteStudentPage((sender as Button).DataContext as Student));
         }
     }
 }

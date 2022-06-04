@@ -15,7 +15,7 @@ namespace SubsystemKKEP.Classes
     public partial class Mark
     {
         public int Id { get; set; }
-        public string MarkValue { get; set; }
+        public int MarkValue { get; set; }
         public System.DateTime Date { get; set; }
         public int IdDiscipline { get; set; }
         public int IdUser { get; set; }
