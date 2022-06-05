@@ -68,8 +68,16 @@ namespace SubsystemKKEP.AppPages.Teacher
         private void BtnOpen_Click(object sender, RoutedEventArgs e)
         {
             var selectedJournal = (sender as Button).DataContext as Appointment;
-            InterfaceManagement.ManagementHeaderText.Text = selectedJournal.Group.GroupName;
-            InterfaceManagement.ManagementPage.Navigate(new GroupJournal(selectedJournal));
+            if (GetData.IsCountStudentsNotNull(selectedJournal.Group))
+            {
+                InterfaceManagement.ManagementHeaderText.Text = selectedJournal.Group.GroupName;
+                InterfaceManagement.ManagementPage.Navigate(new GroupJournal(selectedJournal));
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют студенты в группе. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            
         }
     }
 }

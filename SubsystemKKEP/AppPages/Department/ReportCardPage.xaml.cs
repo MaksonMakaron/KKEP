@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SubsystemKKEP.Classes;
+using System;
 using System.Linq;
-using System.Text;
-using SubsystemKKEP.Classes;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using Word= Microsoft.Office.Interop.Word;
-using System.Windows.Shapes;
+using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace SubsystemKKEP.AppPages.Department
 {
@@ -31,7 +22,11 @@ namespace SubsystemKKEP.AppPages.Department
             TextGroup.Text = $"Студенты группы: {currentGroup.GroupName}";
             if (currentGroup.Students.Count == 0)
             {
-                MessageBox.Show("Отсутствуют студенты. Обратитесь к администратору");
+                MessageBox.Show("Отсутствуют студенты. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                BtnAnalis.IsEnabled = false;
+                BtnExcel.IsEnabled = false;
+                BtnPDF.IsEnabled = false;
+                BtnWord.IsEnabled = false;
                 return;
             }
             DGridGroups.ItemsSource = currentGroup.Students.ToList();
@@ -49,22 +44,50 @@ namespace SubsystemKKEP.AppPages.Department
 
         private void BtnPDF_Click(object sender, RoutedEventArgs e)
         {
-
+            if (GetData.IsCountDisciplinesNotNull(currentGroup))
+            {
+                ExportWordOrPDF(true);
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют дисциплины у группы. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         private void BtnWord_Click(object sender, RoutedEventArgs e)
         {
-            ExportWord();
+            if (GetData.IsCountDisciplinesNotNull(currentGroup))
+            {
+                ExportWordOrPDF(false);
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют дисциплины у группы. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         private void BtnExcel_Click(object sender, RoutedEventArgs e)
         {
-            ExportExcel();
+            if (GetData.IsCountDisciplinesNotNull(currentGroup))
+            {
+                ExportExcel();
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют дисциплины у группы. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         private void BtnOpenReportCard_Click(object sender, RoutedEventArgs e)
         {
-            InterfaceManagement.ManagementPage.Navigate(new ReportCardConcreteStudentPage((sender as Button).DataContext as Student));
+            if (GetData.IsCountDisciplinesNotNull(currentGroup))
+            {
+                InterfaceManagement.ManagementPage.Navigate(new ReportCardConcreteStudentPage((sender as System.Windows.Controls.Button).DataContext as Student));
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют дисциплины у группы. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         private void ExportExcel()
@@ -72,7 +95,11 @@ namespace SubsystemKKEP.AppPages.Department
 
         }
 
-        private void ExportWord()
+        /// <summary>
+        /// Экспорт в Word или PDF
+        /// </summary>
+        /// <param name="isPDF">если true - экспорт только в PDF, false - экспорт только в Word</param>
+        private void ExportWordOrPDF(bool isPDF)
         {
             var application = new Word.Application();
             Word.Document document = application.Documents.Add();
@@ -95,20 +122,7 @@ namespace SubsystemKKEP.AppPages.Department
             headerRange.InsertParagraphAfter();
             headerRange.InsertParagraphAfter();
 
-            var currentDisciplines = new List<Appointment>();
-            foreach (var disOfDep in App.DataBase.DisciplineOfDepartments.ToList())
-            {
-                foreach (var appointment in App.DataBase.Appointments.Where(p => p.IdGroup == currentGroup.Id).ToList())
-                {
-                    if (appointment.IdDiscipline == disOfDep.IdDiscipline
-                        && disOfDep.CourseOfStudy == currentGroup.CourseOfStudy
-                        && disOfDep.Department.User.Id == InterfaceManagement.ManagementUser.Id
-                        && currentDisciplines.Where(p=>p.Discipline.DisciplineName == appointment.Discipline.DisciplineName).Count() == 0)
-                    {
-                        currentDisciplines.Add(appointment);
-                    }
-                }
-            }
+            var currentDisciplines = GetData.GetAppointments(currentGroup);
 
             var students = currentGroup.Students.ToList();
             var allMarks = App.DataBase.Marks.Where(p => p.Student.IdGroup == currentGroup.Id).ToList();
@@ -116,7 +130,6 @@ namespace SubsystemKKEP.AppPages.Department
             Word.Paragraph tableParagraph = document.Paragraphs.Add();
             Word.Range tableRange = tableParagraph.Range;
             Word.Table reportTable = document.Tables.Add(tableRange, currentGroup.Students.Count + 1, currentDisciplines.Count + 2);
-
             reportTable.Borders.InsideLineStyle = reportTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
             reportTable.Range.Font.Size = 10;
             reportTable.Columns[1].Width = 30;
@@ -129,7 +142,7 @@ namespace SubsystemKKEP.AppPages.Department
             cellRange.Text = "Фамилия, И. О.";
             reportTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
             reportTable.Rows[1].Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-            reportTable.Rows[1].Height = 100;
+            reportTable.Rows[1].Height = 150;
 
             for (int j = 0; j < students.Count; j++)
             {
@@ -165,16 +178,6 @@ namespace SubsystemKKEP.AppPages.Department
 
             }
 
-            //for (int k = 0; k < allMarks.Count; k++)
-            //{
-            //    var avg = App.DataBase.Marks.
-            //        Where(p => p.IdStudent == student.Id
-            //        && p.Discipline.DisciplineName == curDis.DisciplineName)
-            //        .Average(p => p.MarkValue);
-            //    cellRange = reportTable.Cell(i + 2, i + 3).Range;
-            //    cellRange.Text = avg.ToString();
-            //}
-
             Word.Paragraph departament = document.Paragraphs.Add();
             Word.Range departamentRange = header.Range;
             departamentRange.InsertParagraphAfter();
@@ -186,19 +189,37 @@ namespace SubsystemKKEP.AppPages.Department
 
 
             var path = $"Ведомость группы {currentGroup.GroupName} от {date.ToString("d")}";
-            var saveDocx = $"{path}.docx";
             try
             {
-                document.SaveAs2($"D:\\{saveDocx}");
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.FileName = path;
+                sfd.Title = $"Сохранение ведомости группы {currentGroup.GroupName}";
+                if (isPDF)
+                {
+                    sfd.DefaultExt = "pdf";
+                    if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        document.SaveAs2(sfd.FileName, Word.WdExportFormat.wdExportFormatPDF);
+                        MessageBox.Show("Ведомость сформирована", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else
+                {
+                    sfd.DefaultExt = "docx";
+                    if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        document.SaveAs(sfd.FileName);
+                        MessageBox.Show("Ведомость сформирована", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
+                application.Quit();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
-            application.Quit();
-            MessageBox.Show("Ведомость сформирована", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

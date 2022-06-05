@@ -87,7 +87,14 @@ namespace SubsystemKKEP.AppPages.Department
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnOpenJournals_Click(object sender, RoutedEventArgs e)
         {
-            InterfaceManagement.ManagementPage.Navigate(new CurrentJournalPage((sender as Button).DataContext as Group));
+            if (GetData.IsCountStudentsNotNull((sender as Button).DataContext as Group))
+            {
+                InterfaceManagement.ManagementPage.Navigate(new CurrentJournalPage((sender as Button).DataContext as Group));
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют студенты в группе. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         /// <summary>
@@ -97,7 +104,14 @@ namespace SubsystemKKEP.AppPages.Department
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnReportCard_Click(object sender, RoutedEventArgs e)
         {
-            InterfaceManagement.ManagementPage.Navigate(new ReportCardPage((sender as Button).DataContext as Group));
+            if (GetData.IsCountStudentsNotNull((sender as Button).DataContext as Group))
+            {
+                InterfaceManagement.ManagementPage.Navigate(new ReportCardPage((sender as Button).DataContext as Group));
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют студенты в группе. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         /// <summary>
@@ -122,7 +136,7 @@ namespace SubsystemKKEP.AppPages.Department
                 UpdateGroups();
                 var course = new List<string>
                 {
-                "Все курсы", "1", "2", "3", "4"
+                    "Все курсы", "1", "2", "3", "4"
                 };
                 CmbSortCourse.ItemsSource = course;
                 CmbSortCourse.SelectedIndex = 0;

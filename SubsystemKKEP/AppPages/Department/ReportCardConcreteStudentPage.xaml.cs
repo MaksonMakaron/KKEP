@@ -42,19 +42,7 @@ namespace SubsystemKKEP.AppPages.Department
                 GroupBy(q => q.Discipline).Select(w => new { Dis = w.Key, Avg = w.Average(s => s.MarkValue) }).ToList();
             var report = new Dictionary<string, string>();
 
-            var currentDisciplines = new List<Appointment>();
-            foreach (var disOfDep in App.DataBase.DisciplineOfDepartments.ToList())
-            {
-                foreach (var appointment in App.DataBase.Appointments.Where(p => p.IdGroup == student.IdGroup).ToList())
-                {
-                    if (appointment.IdDiscipline == disOfDep.IdDiscipline
-                        && disOfDep.CourseOfStudy == student.Group.CourseOfStudy
-                        && disOfDep.Department.User.Id == InterfaceManagement.ManagementUser.Id)
-                    {
-                        currentDisciplines.Add(appointment);
-                    }
-                }
-            }
+            var currentDisciplines = GetData.GetAppointments(student.Group);
 
             foreach (var curDis in currentDisciplines)
             {
