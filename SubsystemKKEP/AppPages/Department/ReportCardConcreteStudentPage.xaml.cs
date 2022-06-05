@@ -21,13 +21,25 @@ namespace SubsystemKKEP.AppPages.Department
     /// </summary>
     public partial class ReportCardConcreteStudentPage : Page
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="student"></param>
         public ReportCardConcreteStudentPage(Student student)
         {
             InitializeComponent();
             TextStudent.Text = $"Студент: {student.FullName}";
+            ReportCardStudent(student);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="student"></param>
+        private void ReportCardStudent(Student student)
+        {
             var marks = App.DataBase.Marks.Where(p => p.IdStudent == student.Id).
-                GroupBy(q=> q.Discipline).Select(w=> new { Dis = w.Key, Avg = w.Average(s => s.MarkValue)}).ToList();
+                GroupBy(q => q.Discipline).Select(w => new { Dis = w.Key, Avg = w.Average(s => s.MarkValue) }).ToList();
             var report = new Dictionary<string, string>();
 
             var currentDisciplines = new List<Appointment>();
@@ -59,10 +71,14 @@ namespace SubsystemKKEP.AppPages.Department
                     report.Add(curDis.Discipline.DisciplineName, "н/а");
                 }
             }
-
             DGridReport.ItemsSource = report.ToList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
