@@ -22,6 +22,7 @@
                 <Button x:Name="BtnAddGroup"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnAddGroup_Click"
+                        TabIndex="10"
                         ToolTip="Добавить группу">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Add.png"
@@ -31,7 +32,8 @@
                 <Button x:Name="BtnDeleteGroup"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnDeleteGroup_Click"
-                        ToolTip="Удалить группу">
+                        ToolTip="Удалить группу"
+                        TabIndex="11">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Delete.png"
                                Style="{StaticResource IconButton}"></Image>
@@ -75,7 +77,7 @@
                                              MaxLength="30"
                                              HorizontalContentAlignment="Left"
                                              Width="160"
-                                             TabIndex="1"
+                                             TabIndex="12"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
                                     <Image Source="/SubsystemKKEP;component/Resources/Search.png"
@@ -84,17 +86,20 @@
                             </Border>
                             <ComboBox x:Name="CmbSortSpecialization"
                                       Width="200"
+                                      TabIndex="13"
                                       ToolTip="Сортировка по специалильности"
                                       DisplayMemberPath="ShortName"
                                       SelectionChanged="CmbSortSpecialization_SelectionChanged"></ComboBox>
                             <ComboBox x:Name="CmbSortDepartment"
                                       Width="160"
+                                      TabIndex="13"
                                       Margin="10,0,0,0"
                                       DisplayMemberPath="DepartmentName"
                                       ToolTip="Сортировка по отделению"
                                       SelectionChanged="CmbSortDepartment_SelectionChanged"></ComboBox>
                             <ComboBox x:Name="CmbSortCourse"
                                       Width="130"
+                                      TabIndex="14"
                                       Margin="10 0"
                                       ToolTip="Сортировка по курсу"
                                       SelectionChanged="CmbSortCourse_SelectionChanged"></ComboBox>
@@ -102,6 +107,7 @@
                                       VerticalContentAlignment="Center"
                                       HorizontalContentAlignment="Center"
                                       FontSize="14"
+                                      TabIndex="15"
                                       Content="Только в архиве"
                                       Margin="10 0"
                                       ToolTip="Сортировка по архивному значению" 

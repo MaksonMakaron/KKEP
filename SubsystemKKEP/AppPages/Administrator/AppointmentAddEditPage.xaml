@@ -43,10 +43,11 @@
                                HorizontalAlignment="Center"
                                Margin="0,0,0,10"></TextBlock>
                         <ComboBox x:Name="CmbDiscipline"
-                              Width="600"
-                              ToolTip="Выбор дисциплины"
-                              SelectedItem="{Binding Discipline}"
-                              DisplayMemberPath="DisciplineName"></ComboBox>
+                                  Width="600"
+                                  TabIndex="10"
+                                  ToolTip="Выбор дисциплины"
+                                  SelectedItem="{Binding Discipline}"
+                                  DisplayMemberPath="DisciplineName"></ComboBox>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
@@ -64,6 +65,7 @@
                                        Margin="0,0,0,10"></TextBlock>
                             <ComboBox x:Name="CmbUser"
                                       Width="300"
+                                      TabIndex="11"
                                       ToolTip="Выбор преподавателя"
                                       SelectedItem="{Binding User}"
                                       DisplayMemberPath="UserName"></ComboBox>
@@ -77,6 +79,7 @@
                                Margin="0,0,0,10"></TextBlock>
                             <ComboBox x:Name="CmbGroup"
                                       Width="300"
+                                      TabIndex="12"
                                       ToolTip="Группа"
                                       SelectedItem="{Binding Group}"
                                       DisplayMemberPath="GroupName"></ComboBox>
@@ -84,6 +87,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Button x:Name="BtnSave"
+                        TabIndex="13"
                         Click="BtnSave_Click">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"

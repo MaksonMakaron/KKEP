@@ -141,5 +141,32 @@ namespace SubsystemKKEP.AppPages.Administrator
         {
             UpdateUsers();
         }
+
+        /// <summary>
+        /// При нажатии на кнопку - переход на страницу просмотра истории входа
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
+        private void BtnLoginHistory_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var history = App.DataBase.LogIns.Count();
+
+                if (history > 0)
+                {
+                    InterfaceManagement.ManagementPage.Navigate(new LoginHistoryPage());
+                }
+                else
+                {
+                    MessageBox.Show("Отсутсвует история входа", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
     }
 }

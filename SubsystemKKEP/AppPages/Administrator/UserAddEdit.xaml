@@ -22,6 +22,7 @@
                 <Button x:Name="BtnBack"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnBack_Click"
+                        TabIndex="10"
                         ToolTip="Назад">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Back.png"
@@ -56,11 +57,12 @@
                                 <TextBox x:Name="TbUserName"
                                          Margin="0"
                                          Height="30"
+                                         TabIndex="11"
                                          Text="{Binding UserName}"
                                          MaxLength="100"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" Width="430">
+                                         Width="430">
                                 </TextBox>
                             </StackPanel>
                         </Border>
@@ -75,6 +77,7 @@
                                Margin="0,0,0,10"></TextBlock>
                     <ComboBox x:Name="CmbRole"
                               Width="300"
+                              TabIndex="12"
                               ToolTip="Роль пользователя"
                               SelectedItem="{Binding Role}"
                               DisplayMemberPath="RoleName"></ComboBox>
@@ -106,11 +109,12 @@
                                     <TextBox x:Name="TbLogin"
                                              Margin="0"
                                              Height="30"
+                                             TabIndex="13"
                                              Text="{Binding Login}"
                                              MaxLength="30"
                                              HorizontalAlignment="Stretch"
                                              HorizontalContentAlignment="Left"
-                                             TabIndex="1" Width="190">
+                                             Width="190">
                                     </TextBox>
                                 </StackPanel>
                             </Border>
@@ -141,7 +145,8 @@
                                                  Margin="0"></TextBox>
                                         <PasswordBox x:Name="PbPassword"
                                                      Width="160"
-                                                     MaxLength="20" TabIndex="2"/>
+                                                     TabIndex="14"
+                                                     MaxLength="20"/>
                                     </Grid>
                                     <Button x:Name="BtnSeePassword"
                                             Cursor="Hand"
@@ -159,6 +164,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Button x:Name="BtnSave"
+                        TabIndex="16"
                         Click="BtnSave_Click">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"

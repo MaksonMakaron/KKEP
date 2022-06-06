@@ -62,7 +62,7 @@
                                          MaxLength="30"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" Width="190">
+                                         TabIndex="0" Width="190">
                                 </TextBox>
                             </StackPanel>
                         </Border>
@@ -93,7 +93,7 @@
                                          MaxLength="5"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" Width="100">
+                                         TabIndex="11" Width="100">
                                 </TextBox>
                             </StackPanel>
                         </Border>
@@ -111,6 +111,7 @@
                                    Margin="0,0,0,10"></TextBlock>
                         <ComboBox x:Name="CmbSpecialization"
                                   Width="170"
+                                  TabIndex="12"
                                   ToolTip="Специальность группы"
                                   SelectedItem="{Binding Specialization}"
                                   DisplayMemberPath="ShortName"></ComboBox>
@@ -125,17 +126,20 @@
                         <ComboBox x:Name="CmbCourse"
                                   SelectedItem="{Binding CourseOfStudy}"
                                   Width="170"
+                                  TabIndex="13"
                                   ToolTip="Курс группы"></ComboBox>
                     </StackPanel>
                 </StackPanel>
                 <CheckBox x:Name="CbIsArchive"
                           HorizontalAlignment="Center"
                           Content="В архиве"
+                          TabIndex="14"
                           ToolTip="Если отмечено, значит группа находится в архиве. Студенты группы выпустились"
                           IsChecked="{Binding IsArchive}"
                           VerticalContentAlignment="Center"
                           FontSize="14"></CheckBox>
                 <Button x:Name="BtnSave"
+                        TabIndex="15"
                         Click="BtnSave_Click">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"

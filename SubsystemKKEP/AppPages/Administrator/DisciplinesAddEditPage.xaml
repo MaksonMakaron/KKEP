@@ -22,6 +22,7 @@
                 <Button x:Name="BtnBack"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnBack_Click"
+                        TabIndex="10"
                         ToolTip="Назад">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Back.png"
@@ -60,7 +61,7 @@
                                          MaxLength="100"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" Width="430">
+                                         TabIndex="11" Width="430">
                                 </TextBox>
                             </StackPanel>
                         </Border>
@@ -77,6 +78,7 @@
                                                    Margin="0,5,0,10"></TextBlock>
                                         <ComboBox x:Name="CmbDepartment"
                                                   Width="200"
+                                                  TabIndex="12"
                                                   ToolTip="Отделение"
                                                   DisplayMemberPath="DepartmentName"></ComboBox>
                                     </StackPanel>
@@ -87,11 +89,13 @@
                                                    Margin="0,5,0,10"></TextBlock>
                                         <ComboBox x:Name="CmbCourse"
                                                   Width="150"
+                                                  TabIndex="13"
                                                   ToolTip="Курс"></ComboBox>
                                     </StackPanel>
 
                                 </StackPanel>
                                 <Button x:Name="BtnAdd"
+                                        TabIndex="14"
                                         Click="BtnAdd_Click">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal"
@@ -154,6 +158,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Button x:Name="BtnSave"
+                        TabIndex="15"
                         Click="BtnSave_Click">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"

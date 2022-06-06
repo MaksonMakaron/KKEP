@@ -19,6 +19,7 @@
                         Background="#D3F2FF"
                         Grid.Row="0">
                 <Button x:Name="BtnBack"
+                        TabIndex="2"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnBack_Click">
                     <Button.Content>
@@ -27,6 +28,7 @@
                     </Button.Content>
                 </Button>
                 <Button x:Name="BtnDeleteMark"
+                        TabIndex="3"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnDeleteMark_Click">
                     <Button.Content>
@@ -75,6 +77,7 @@
                                               DisplayMemberPath="ShortName"
                                               Margin="0 15"
                                               Width="270"
+                                              TabIndex="4"
                                               ToolTip="Сортировка по студенту"
                                               SelectionChanged="CmbSortStudent_SelectionChanged"></ComboBox>
                                     <Border Background="White"
@@ -91,6 +94,7 @@
                                             <DatePicker x:Name="DpDateMarkSorting"
                                                         SelectedDateChanged="DpDateMarkSorting_SelectedDateChanged"
                                                         Height="auto"
+                                                        TabIndex="5"
                                                         Width="200">
                                             </DatePicker>
                                         </StackPanel>
@@ -113,6 +117,7 @@
                                                   SelectedItem="{Binding Student}"
                                                   DisplayMemberPath="ShortName"
                                                   Margin="0 15"
+                                                  TabIndex="6"
                                                   Width="270"></ComboBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal"
@@ -127,6 +132,7 @@
                                             <ComboBox x:Name="CmbMark"
                                                       SelectedItem="{Binding MarkValue}"
                                                       Width="60"
+                                                      TabIndex="7"
                                                       Margin="0 15"></ComboBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
@@ -148,6 +154,7 @@
                                                         HorizontalAlignment="Center">
                                                     <DatePicker x:Name="DpDateMark"
                                                                 Height="auto"
+                                                                TabIndex="8"
                                                                 SelectedDate="{Binding Date}"
                                                                 Width="200">
                                                         <DatePicker.Resources>
@@ -164,10 +171,11 @@
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
                                         <Button x:Name="BtnReset"
-                                                    Width="30"
-                                                    Height="30"
-                                                    ToolTip="Сбросить"
-                                                    Click="BtnReset_Click">
+                                                Width="30"
+                                                Height="30"
+                                                TabIndex="9"
+                                                ToolTip="Сбросить"
+                                                Click="BtnReset_Click">
                                             <Button.Content>
                                                 <StackPanel Orientation="Horizontal"
                                                             VerticalAlignment="Center"

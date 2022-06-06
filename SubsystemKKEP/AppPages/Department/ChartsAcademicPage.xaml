@@ -38,6 +38,7 @@
                             Height="23"
                             Padding="0"
                             Width="23"
+                            TabIndex="4"
                             Background="AliceBlue"
                             Click="BtnHelper_Click"
                             ToolTip="Справка"

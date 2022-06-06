@@ -23,6 +23,7 @@
                 <Button x:Name="BtnBack"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnBack_Click"
+                        TabIndex="10"
                         ToolTip="Назад">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Back.png"
@@ -58,7 +59,7 @@
                                      Height="30"
                                      HorizontalAlignment="Stretch"
                                      HorizontalContentAlignment="Left"
-                                     TabIndex="1" 
+                                     TabIndex="11" 
                                      Width="390">
                             </TextBox>
                         </StackPanel>
@@ -92,7 +93,7 @@
                                          MaxLength="3"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" 
+                                         TabIndex="12" 
                                          Width="190">
                                 </TextBox>
                             </StackPanel>
@@ -110,6 +111,7 @@
                                        Margin="0,0,0,10"></TextBlock>
                             <ComboBox x:Name="CmbDepartment"
                                       Width="170"
+                                      TabIndex="13"
                                       Margin="0"
                                       ToolTip="Отделение"
                                       SelectedItem="{Binding Department}"
@@ -119,7 +121,8 @@
                 </StackPanel>
                 
                 <Button x:Name="BtnSave"
-                        Click="BtnSave_Click">
+                        Click="BtnSave_Click"
+                        TabIndex="13">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"

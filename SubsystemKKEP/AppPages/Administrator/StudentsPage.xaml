@@ -22,6 +22,7 @@
                 <Button x:Name="BtnAddStudent"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnAddStudent_Click"
+                        TabIndex="10"
                         ToolTip="Добавить студента">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Add.png"
@@ -31,6 +32,7 @@
                 <Button x:Name="BtnDeleteStudent"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnDeleteStudent_Click"
+                        TabIndex="11"
                         ToolTip="Удалить студента">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Delete.png"
@@ -75,7 +77,7 @@
                                              MaxLength="30"
                                              HorizontalContentAlignment="Left"
                                              Width="720"
-                                             TabIndex="1"
+                                             TabIndex="12"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
                                     <Image Source="/SubsystemKKEP;component/Resources/Search.png"
@@ -84,6 +86,7 @@
                             </Border>
                             <ComboBox x:Name="CmbSortGroup"
                                       Width="300"
+                                      TabIndex="13"
                                       ToolTip="Сортировка по группе"
                                       DisplayMemberPath="GroupName"
                                       SelectionChanged="CmbSortGroup_SelectionChanged"></ComboBox>

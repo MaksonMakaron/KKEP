@@ -65,7 +65,14 @@ namespace SubsystemKKEP.AppWindows
             var password = PbPassword.Password;
             if (!string.IsNullOrWhiteSpace(login) && !string.IsNullOrWhiteSpace(password))
             {
-                AuthorizationUser(login, password);
+                if (!PasswordLoginManagement.AuthorizationUser(login, password))
+                {
+                    MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    this.Close();
+                }
             }
             else
             {
@@ -79,115 +86,6 @@ namespace SubsystemKKEP.AppWindows
                     errors += "Введите пароль";
                 }
                 MessageBox.Show($"{errors}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-       
-
-        /// <summary>
-        /// Открытие окна Администратора
-        /// </summary>
-        /// <param name="ConcreteUser">пользователь, который авторизовался</param>
-        private static void OpenAdministratorWindow(User ConcreteUser)
-        {
-            InterfaceManagement.ManagementUser = ConcreteUser;
-            RecordLogIn(ConcreteUser);
-            AdministratorWindow administratorWindow = new AdministratorWindow();
-            administratorWindow.Show();
-            InterfaceManagement.ManagementWindow = administratorWindow;
-            InterfaceManagement.ManagementWindow.Title = $"Администратор. {InterfaceManagement.ManagementUser.UserName}";
-        }
-
-        /// <summary>
-        /// Открытие окна Преподавателя
-        /// </summary>
-        /// <param name="ConcreteUser">пользователь, который авторизовался</param>
-        private static void OpenTeacherWindow(User ConcreteUser)
-        {
-            InterfaceManagement.ManagementUser = ConcreteUser;
-            RecordLogIn(ConcreteUser);
-            TeacherWindow teacherWindow = new TeacherWindow();
-            teacherWindow.Show();
-            InterfaceManagement.ManagementWindow = teacherWindow;
-            InterfaceManagement.ManagementWindow.Title = $"Преподаватель. {InterfaceManagement.ManagementUser.UserName}";
-        }
-
-        /// <summary>
-        /// Открытие окна Отделения
-        /// </summary>
-        /// <param name="ConcreteUser">пользователь, который авторизовался</param>
-        private static void OpenDepartmentWindow(User ConcreteUser)
-        {
-            InterfaceManagement.ManagementUser = ConcreteUser;
-            RecordLogIn(ConcreteUser);
-            DepartmentWindow departmentWindow = new DepartmentWindow();
-            departmentWindow.Show();
-            InterfaceManagement.ManagementWindow = departmentWindow;
-            InterfaceManagement.ManagementWindow.Title = $"Отделение. {InterfaceManagement.ManagementUser.UserName}";
-            RecordLogIn(ConcreteUser);
-        }
-
-        /// <summary>
-        /// Авторизация пользователя
-        /// </summary>
-        /// <param name="login">логин пользователя</param>
-        /// <param name="password">пароль пользователя</param>
-        private static void AuthorizationUser(string login, string password)
-        {
-            var users = App.DataBase.Users.ToList();
-            var authorization = false;
-            password = PasswordLoginManagement.CreateSHA512(password).ToLower();
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (login == users[i].Login && password == users[i].Password)
-                {
-                    authorization = true;
-                    switch (users[i].Role.RoleName)
-                    {
-                        case "Администратор":
-                            OpenAdministratorWindow(users[i]);
-                            AuthorizationWindow.Close();
-                            break;
-                        case "Преподаватель":
-                            OpenTeacherWindow(users[i]);
-                            AuthorizationWindow.Close();
-                            break;
-                        case "Отделение":
-                            OpenDepartmentWindow(users[i]);
-                            AuthorizationWindow.Close();
-                            break;
-                        default:
-                            MessageBox.Show("Ошибка авторизации", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                            break;
-                    }
-                }
-            }
-            if (!authorization)
-            {
-                MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        /// <summary>
-        /// Запись входа в систему
-        /// </summary>
-        /// <param name="concreteUser">пользователь, который авторизовался</param>
-        private static void RecordLogIn(User concreteUser)
-        {
-            LogIn logIn = new LogIn
-            {
-                User = concreteUser,
-                DateLogIn = DateTime.Now
-            };
-            try
-            {
-                App.DataBase.LogIns.Add(logIn);
-                App.DataBase.SaveChanges();
-                InterfaceManagement.LogInUser = logIn;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
             }
         }
     }

@@ -52,7 +52,7 @@
                         </Button.Content>
                     </Button>
                     <Button x:Name="BtnStudents" 
-                            TabIndex="2"
+                            TabIndex="3"
                             Style="{StaticResource BtnInMenu}" Click="BtnStudents_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal"
@@ -66,7 +66,7 @@
                         </Button.Content>
                     </Button>
                     <Button x:Name="BtnGroups" 
-                            TabIndex="2"
+                            TabIndex="4"
                             Style="{StaticResource BtnInMenu}" Click="BtnGroups_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal"
@@ -80,7 +80,7 @@
                         </Button.Content>
                     </Button>
                     <Button x:Name="BtnDisciplines" 
-                            TabIndex="2"
+                            TabIndex="5"
                             Style="{StaticResource BtnInMenu}" Click="BtnDisciplines_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal"
@@ -94,7 +94,7 @@
                         </Button.Content>
                     </Button>
                     <Button x:Name="BtnSpecialties" 
-                            TabIndex="2"
+                            TabIndex="6"
                             Style="{StaticResource BtnInMenu}" Click="BtnSpecialties_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal"
@@ -108,7 +108,7 @@
                         </Button.Content>
                     </Button>
                     <Button x:Name="BtnAppointment" 
-                            TabIndex="2"
+                            TabIndex="7"
                             Style="{StaticResource BtnInMenu}" Click="BtnAppointment_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal"
@@ -122,7 +122,7 @@
                         </Button.Content>
                     </Button>
                     <Button x:Name="BtnSignOut" 
-                            TabIndex="3"
+                            TabIndex="8"
                             Style="{StaticResource BtnInMenu}" Click="BtnSignOut_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal"

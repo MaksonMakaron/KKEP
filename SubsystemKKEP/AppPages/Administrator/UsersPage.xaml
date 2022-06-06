@@ -19,9 +19,20 @@
                         HorizontalAlignment="Stretch"
                         Background="#D3F2FF"
                         Grid.Row="0">
+                <Button x:Name="BtnLoginHistory"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnLoginHistory_Click"
+                        TabIndex="10"
+                        ToolTip="Просмотр истории входа пользователей">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Time.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
                 <Button x:Name="BtnAddUser"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnAddUser_Click"
+                        TabIndex="11"
                         ToolTip="Добавить пользователя">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Add.png"
@@ -31,6 +42,7 @@
                 <Button x:Name="BtnDeleteUser"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnDeleteUser_Click"
+                        TabIndex="12"
                         ToolTip="Удалить пользователя">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Delete.png"
@@ -72,10 +84,10 @@
                                             HorizontalAlignment="Center">
                                     <TextBox x:Name="TbSearch"
                                              Margin="0"
+                                             TabIndex="13"
                                              MaxLength="30"
                                              HorizontalContentAlignment="Left"
                                              Width="340"
-                                             TabIndex="1"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
                                     <Image Source="/SubsystemKKEP;component/Resources/Search.png"
@@ -83,10 +95,11 @@
                                 </StackPanel>
                             </Border>
                             <ComboBox x:Name="CmbSortRole"
-                                  Width="300"
-                                  ToolTip="Сортировка по роли пользователя"
-                                  DisplayMemberPath="RoleName"
-                                  SelectionChanged="CmbSortRole_SelectionChanged"></ComboBox>
+                                      Width="300"
+                                      TabIndex="14"
+                                      ToolTip="Сортировка по роли пользователя"
+                                      DisplayMemberPath="RoleName"
+                                      SelectionChanged="CmbSortRole_SelectionChanged"></ComboBox>
                         </StackPanel>
                     </StackPanel>
                     

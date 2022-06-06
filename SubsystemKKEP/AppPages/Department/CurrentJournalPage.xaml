@@ -20,6 +20,7 @@
                         Background="#D3F2FF"
                         Grid.Row="0">
                 <Button x:Name="BtnBack"
+                        TabIndex="4"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnBack_Click">
                     <Button.Content>
@@ -36,6 +37,7 @@
                           DisplayMemberPath="Discipline.DisciplineName"
                           Margin="0 15"
                           Width="510"
+                          TabIndex="5"
                           ToolTip="Выберите дисциплину"
                           SelectionChanged="CmbDiscipline_SelectionChanged"></ComboBox>
                 <TextBlock Text="Преподаватель: {выберите дисциплину}"
@@ -69,6 +71,7 @@
                                           DisplayMemberPath="ShortName"
                                           Margin="0 15"
                                           Width="270"
+                                          TabIndex="6"
                                           ToolTip="Сортировка по студенту"
                                           SelectionChanged="CmbSortStudent_SelectionChanged"></ComboBox>
                                 <Border Background="White"
@@ -85,6 +88,7 @@
                                         <DatePicker x:Name="DpDateMarkSorting"
                                                     SelectedDateChanged="DpDateMarkSorting_SelectedDateChanged"
                                                     Height="auto"
+                                                    TabIndex="7"
                                                     Width="200">
                                         </DatePicker>
                                     </StackPanel>

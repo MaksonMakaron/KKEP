@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SubsystemKKEP.AppWindows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -15,27 +16,129 @@ namespace SubsystemKKEP.Classes
     public class PasswordLoginManagement
     {
         /// <summary>
+        /// Авторизация пользователя
+        /// </summary>
+        /// <param name="login">логин</param>
+        /// <param name="password">пароль</param>
+        /// <returns>true - авторизация прошла успешно, false - авторзиация не удалась</returns>
+        public static bool AuthorizationUser(string login, string password)
+        {
+            var users = App.DataBase.Users.ToList();
+            password = CreateSHA512(password).ToLower();
+            
+            for (int i = 0; i < users.Count; i++)
+            {
+                if (login == users[i].Login && password == users[i].Password)
+                {
+                    switch (users[i].Role.RoleName)
+                    {
+                        case "Администратор":
+                            OpenAdministratorWindow(users[i]);
+                            break;
+                        case "Преподаватель":
+                            OpenTeacherWindow(users[i]);
+                            break;
+                        case "Отделение":
+                            OpenDepartmentWindow(users[i]);
+                            break;
+                        default:
+                            MessageBox.Show("Ошибка авторизации", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Открытие окна Администратора
+        /// </summary>
+        /// <param name="сoncreteUser">пользователь, который авторизовался</param>
+        private static void OpenAdministratorWindow(User сoncreteUser)
+        {
+            InterfaceManagement.ManagementUser = сoncreteUser;
+            RecordLogIn(сoncreteUser);
+            AdministratorWindow administratorWindow = new AdministratorWindow();
+            administratorWindow.Show();
+            InterfaceManagement.ManagementWindow = administratorWindow;
+            InterfaceManagement.ManagementWindow.Title = $"Администратор. {InterfaceManagement.ManagementUser.UserName}";
+        }
+
+        /// <summary>
+        /// Открытие окна Преподавателя
+        /// </summary>
+        /// <param name="сoncreteUser">пользователь, который авторизовался</param>
+        private static void OpenTeacherWindow(User сoncreteUser)
+        {
+            InterfaceManagement.ManagementUser = сoncreteUser;
+            RecordLogIn(сoncreteUser);
+            TeacherWindow teacherWindow = new TeacherWindow();
+            teacherWindow.Show();
+            InterfaceManagement.ManagementWindow = teacherWindow;
+            InterfaceManagement.ManagementWindow.Title = $"Преподаватель. {InterfaceManagement.ManagementUser.UserName}";
+        }
+
+        /// <summary>
+        /// Открытие окна Отделения
+        /// </summary>
+        /// <param name="сoncreteUser">пользователь, который авторизовался</param>
+        private static void OpenDepartmentWindow(User сoncreteUser)
+        {
+            InterfaceManagement.ManagementUser = сoncreteUser;
+            RecordLogIn(сoncreteUser);
+            DepartmentWindow departmentWindow = new DepartmentWindow();
+            departmentWindow.Show();
+            InterfaceManagement.ManagementWindow = departmentWindow;
+            InterfaceManagement.ManagementWindow.Title = $"Отделение. {InterfaceManagement.ManagementUser.UserName}";
+            RecordLogIn(сoncreteUser);
+        }
+
+        /// <summary>
+        /// Запись входа в систему
+        /// </summary>
+        /// <param name="concreteUser">пользователь, который авторизовался</param>
+        private static void RecordLogIn(User concreteUser)
+        {
+            LogIn logIn = new LogIn
+            {
+                User = concreteUser,
+                DateLogIn = DateTime.Now
+            };
+            try
+            {
+                App.DataBase.LogIns.Add(logIn);
+                App.DataBase.SaveChanges();
+                InterfaceManagement.LogInUser = logIn;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        /// <summary>
         /// При нажатии кнопки мыши - пароль показывается 
         /// </summary>
-        /// <param name="TbPassword">элемент textbox</param>
-        /// <param name="PbPassword">элемент passwordbox</param>
-        public static void SeePasswordPreviewMouseDown(TextBox TbPassword, PasswordBox PbPassword)
+        /// <param name="tbPassword">элемент textbox</param>
+        /// <param name="pbPassword">элемент passwordbox</param>
+        public static void SeePasswordPreviewMouseDown(TextBox tbPassword, PasswordBox pbPassword)
         {
-            TbPassword.Text = PbPassword.Password;
-            PbPassword.Visibility = Visibility.Hidden;
-            TbPassword.Visibility = Visibility.Visible;
+            tbPassword.Text = pbPassword.Password;
+            pbPassword.Visibility = Visibility.Hidden;
+            tbPassword.Visibility = Visibility.Visible;
         }
 
         /// <summary>
         /// При нажатии кнопки мыши - пароль скрывается 
         /// </summary>
-        /// <param name="TbPassword">элемент textbox</param>
-        /// <param name="PbPassword">элемент passwordbox</param>
-        public static void SeePasswordPreviewMouseUp(TextBox TbPassword, PasswordBox PbPassword)
+        /// <param name="tbPassword">элемент textbox</param>
+        /// <param name="pbPassword">элемент passwordbox</param>
+        public static void SeePasswordPreviewMouseUp(TextBox tbPassword, PasswordBox pbPassword)
         {
-            PbPassword.Password = TbPassword.Text;
-            TbPassword.Visibility = Visibility.Hidden;
-            PbPassword.Visibility = Visibility.Visible;
+            pbPassword.Password = tbPassword.Text;
+            tbPassword.Visibility = Visibility.Hidden;
+            pbPassword.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -80,15 +183,15 @@ namespace SubsystemKKEP.Classes
         /// <summary>
         /// Проверка совпадения введенного пароля со старым
         /// </summary>
-        /// <param name="EnteredPassword">введеный пароль</param>
+        /// <param name="enteredPassword">введеный пароль</param>
         /// <returns></returns>
-        public static bool PasswordCheck(string EnteredPassword)
+        public static bool PasswordCheck(string enteredPassword)
         {
             var users = App.DataBase.Users.ToList();
-            EnteredPassword = PasswordLoginManagement.CreateSHA512(EnteredPassword).ToLower();
+            enteredPassword = CreateSHA512(enteredPassword).ToLower();
             for (int i = 0; i < users.Count; i++)
             {
-                if (EnteredPassword == users[i].Password)
+                if (enteredPassword == users[i].Password)
                 {
                     return true;
                 }
@@ -99,11 +202,11 @@ namespace SubsystemKKEP.Classes
         /// <summary>
         /// Смена пароля
         /// </summary>
-        /// <param name="NewPassword">новый пароль</param>
-        public static void ChangePassword(string NewPassword)
+        /// <param name="newPassword">новый пароль</param>
+        public static void ChangePassword(string newPassword)
         {
             User user = App.DataBase.Users.Where(p => p.Id == InterfaceManagement.ManagementUser.Id).FirstOrDefault();
-            user.Password = PasswordLoginManagement.CreateSHA512(NewPassword);
+            user.Password = PasswordLoginManagement.CreateSHA512(newPassword);
             App.DataBase.SaveChanges();
         }
     }

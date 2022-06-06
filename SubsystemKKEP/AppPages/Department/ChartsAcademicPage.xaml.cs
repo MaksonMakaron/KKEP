@@ -45,10 +45,10 @@ namespace SubsystemKKEP.AppPages.Department
             currentSeries.ChartType = SeriesChartType.Doughnut;
             currentSeries.Points.Clear();
 
-            var otl = 0;
-            var hor = 0;
-            var ydov = 0;
-            var neydov = 0;
+            var excellents = 0; //отличники
+            var goods = 0; //хорошисты
+            var acceptables = 0; //троечники
+            var bad = 0; //двоечники
             var currentDisciplines = GetData.GetAppointments(currentGroup);
 
             foreach (var student in currentGroup.Students.ToList())
@@ -75,36 +75,36 @@ namespace SubsystemKKEP.AppPages.Department
 
                 if (report.ContainsValue("2") || report.ContainsValue("н/а"))
                 {
-                    neydov++;
+                    bad++;
                 }
                 else if (report.ContainsValue("3"))
                 {
-                    ydov++;
+                    acceptables++;
                 }
                 else if (report.ContainsValue("4"))
                 {
-                    hor++;
+                    goods++;
                 }
                 else
                 {
-                    otl++;
+                    excellents++;
                 }
             }
-            if (neydov > 0)
+            if (bad > 0)
             {
-                currentSeries.Points.AddXY("Неудовл.", neydov);
+                currentSeries.Points.AddXY("Неудовл.", bad);
             }
-            if (ydov > 0)
+            if (acceptables > 0)
             {
-                currentSeries.Points.AddXY("Удов.", ydov);
+                currentSeries.Points.AddXY("Удов.", acceptables);
             }
-            if (hor > 0)
+            if (goods > 0)
             {
-                currentSeries.Points.AddXY("Хор.", hor);
+                currentSeries.Points.AddXY("Хор.", goods);
             }
-            if (otl > 0)
+            if (excellents > 0)
             {
-                currentSeries.Points.AddXY("Отл.", otl);
+                currentSeries.Points.AddXY("Отл.", excellents);
             }
         }
 

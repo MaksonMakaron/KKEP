@@ -74,7 +74,7 @@
                                      MaxLength="20"
                                      Margin="0"></TextBox>
                                 <PasswordBox x:Name="PbPassword"
-                                         MaxLength="20" TabIndex="2"/>
+                                             MaxLength="20" TabIndex="2"/>
                             </Grid>
                             <Button x:Name="BtnSeePassword"
                                     Cursor="Hand"
@@ -84,14 +84,14 @@
                                     Style="{StaticResource btnSeePassword}" TabIndex="3">
                                 <Button.Content>
                                     <Image Source="/SubsystemKKEP;component/Resources/Eye.png"
-                                       Style="{StaticResource IconButton}"></Image>
+                                           Style="{StaticResource IconButton}"></Image>
                                 </Button.Content>
                             </Button>
                         </StackPanel>
                     </Border>
                 </StackPanel>
                 
-                <Button x:Name="BtnSignIn" Click="BtnSignIn_Click" TabIndex="4">
+                <Button x:Name="BtnSignIn" Click="BtnSignIn_Click" TabIndex="3">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"

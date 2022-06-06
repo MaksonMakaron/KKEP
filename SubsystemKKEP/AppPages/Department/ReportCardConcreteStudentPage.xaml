@@ -22,6 +22,7 @@
                 <Button x:Name="BtnBack"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnBack_Click"
+                        TabIndex="4"
                         ToolTip="Назад">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Back.png"

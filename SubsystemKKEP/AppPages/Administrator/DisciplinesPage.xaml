@@ -23,6 +23,7 @@
                 <Button x:Name="BtnAddDiscipline"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnAddDiscipline_Click"
+                        TabIndex="10"
                         ToolTip="Добавить дисциплину">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Add.png"
@@ -32,6 +33,7 @@
                 <Button x:Name="BtnDeleteDiscipline"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnDeleteDiscipline_Click"
+                        TabIndex="11"
                         ToolTip="Удалить дисциплину">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Delete.png"
@@ -76,7 +78,7 @@
                                              MaxLength="30"
                                              HorizontalContentAlignment="Left"
                                              Width="640"
-                                             TabIndex="1"
+                                             TabIndex="12"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
                                     <Image Source="/SubsystemKKEP;component/Resources/Search.png"

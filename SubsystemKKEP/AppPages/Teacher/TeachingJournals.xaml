@@ -57,7 +57,7 @@
                                              Margin="0"
                                              HorizontalContentAlignment="Left"
                                              Width="650"
-                                             TabIndex="1"
+                                             TabIndex="4"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
                                     <Image Source="/SubsystemKKEP;component/Resources/Search.png"

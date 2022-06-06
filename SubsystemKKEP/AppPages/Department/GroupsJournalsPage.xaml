@@ -58,7 +58,7 @@
                                              MaxLength="5"
                                              HorizontalContentAlignment="Left"
                                              Width="330"
-                                             TabIndex="1"
+                                             TabIndex="4"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
                                     <Image Source="/SubsystemKKEP;component/Resources/Search.png"
@@ -69,9 +69,11 @@
                                       Width="170"
                                       ToolTip="Сортировка по курсу"
                                       Margin="5 0"
+                                      TabIndex="5"
                                       SelectionChanged="CmbSortCourse_SelectionChanged"></ComboBox>
                             <ComboBox x:Name="CmbSortSpecialization"
                                       Width="250"
+                                      TabIndex="6"
                                       Margin="5 0"
                                       ToolTip="Сортировка по специальности"
                                       DisplayMemberPath="ShortName"

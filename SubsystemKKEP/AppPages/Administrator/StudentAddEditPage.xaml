@@ -57,11 +57,12 @@
                                 <TextBox x:Name="TbLastName"
                                          Text="{Binding LastName}"
                                          Margin="0"
+                                         TabIndex="10"
                                          Height="30"
                                          MaxLength="30"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" Width="190">
+                                         Width="190">
                                 </TextBox>
                             </StackPanel>
                         </Border>
@@ -87,11 +88,12 @@
                                 <TextBox x:Name="TbFirstName"
                                          Text="{Binding FirstName}"
                                          Margin="0"
+                                         TabIndex="11"
                                          Height="30"
                                          MaxLength="30"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" Width="190">
+                                         Width="190">
                                 </TextBox>
                             </StackPanel>
                         </Border>
@@ -121,7 +123,7 @@
                                          MaxLength="30"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Left"
-                                         TabIndex="1" Width="190">
+                                         TabIndex="12" Width="190">
                                 </TextBox>
                             </StackPanel>
                         </Border>
@@ -136,11 +138,13 @@
                                Margin="0,0,0,10"></TextBlock>
                     <ComboBox x:Name="CmbGroup"
                               Width="170"
+                              TabIndex="13"
                               ToolTip="Группа студента"
                               SelectedItem="{Binding Group}"
                               DisplayMemberPath="GroupName"></ComboBox>
                 </StackPanel>
                 <Button x:Name="BtnSave"
+                        TabIndex="14"
                         Click="BtnSave_Click">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"

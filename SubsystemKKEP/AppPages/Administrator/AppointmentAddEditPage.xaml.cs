@@ -90,7 +90,6 @@ namespace SubsystemKKEP.AppPages.Administrator
                     MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                
             }
 
             try

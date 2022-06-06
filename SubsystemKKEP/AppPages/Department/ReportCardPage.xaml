@@ -21,6 +21,7 @@
                 <Button x:Name="BtnBack"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnBack_Click"
+                        TabIndex="4"
                         ToolTip="Назад">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Back.png"
@@ -30,6 +31,7 @@
                 <Button x:Name="BtnAnalis"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnAnalis_Click"
+                        TabIndex="5"
                         ToolTip="Просмотр анализа (графики)">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Analis.png"
@@ -40,6 +42,7 @@
                 <Button x:Name="BtnPDF"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnPDF_Click"
+                        TabIndex="6"
                         ToolTip="Экспорт в PDF">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/PDF.png"
@@ -49,6 +52,7 @@
                 <Button x:Name="BtnWord"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnWord_Click"
+                        TabIndex="7"
                         ToolTip="Экспорт в Word">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Word.png"
@@ -58,6 +62,7 @@
                 <Button x:Name="BtnExcel"
                         Style="{StaticResource BtnTaskBar}"
                         Click="BtnExcel_Click"
+                        TabIndex="8"
                         ToolTip="Экспорт в Excel">
                     <Button.Content>
                         <Image Source="/SubsystemKKEP;component/Resources/Excel.png"
