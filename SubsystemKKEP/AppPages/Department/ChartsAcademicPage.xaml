@@ -4,11 +4,55 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SubsystemKKEP.AppPages.Department"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ChartsAcademicPage">
 
-    <Grid>
-        
-    </Grid>
+    <Border CornerRadius="0 20 20 0"
+            Background="White">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#D3F2FF"></Grid>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Background="#D3F2FF"
+                        Grid.Row="0">
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock Grid.Row="0" Text="Диаграмма успеваемости"
+                               VerticalAlignment="Center"></TextBlock>
+                    <Button x:Name="BtnHelper" Content="?" 
+                            Height="23"
+                            Padding="0"
+                            Width="23"
+                            Background="AliceBlue"
+                            Click="BtnHelper_Click"
+                            ToolTip="Справка"
+                            VerticalAlignment="Center"></Button>
+                </StackPanel>
+                <WindowsFormsHost Grid.Row="1" Margin="10">
+                    <charts:Chart x:Name="ChartAnalysis">
+                        <charts:Chart.Legends>
+                            <charts:Legend>
+
+                            </charts:Legend>
+                        </charts:Chart.Legends>
+                    </charts:Chart>
+                </WindowsFormsHost>
+            </Grid>
+        </Grid>
+    </Border>
 </Page>

@@ -87,13 +87,20 @@ namespace SubsystemKKEP.AppPages.Department
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnOpenJournals_Click(object sender, RoutedEventArgs e)
         {
-            if (GetData.IsCountStudentsNotNull((sender as Button).DataContext as Group))
+            if (GetData.IsCountStudentsNotNull((sender as Button).DataContext as Group) && GetData.IsCountDisciplinesNotNull((sender as Button).DataContext as Group))
             {
                 InterfaceManagement.ManagementPage.Navigate(new CurrentJournalPage((sender as Button).DataContext as Group));
             }
             else
             {
-                MessageBox.Show("Отсутствуют студенты в группе. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                if (!GetData.IsCountStudentsNotNull((sender as Button).DataContext as Group))
+                {
+                    MessageBox.Show("Отсутствуют студенты в группе. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+                else
+                {
+                    MessageBox.Show("Отсутствуют дисциплины для группы. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
             }
         }
 
