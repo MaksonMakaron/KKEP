@@ -17,6 +17,14 @@ namespace SubsystemKKEP.AppPages.Teacher
         {
             InitializeComponent();
             UpdateJournals();
+            var appointments = App.DataBase.Appointments.
+               Where(p => p.User.Id == InterfaceManagement.ManagementUser.Id && p.Group.IsArchive == false).ToList();
+            if (appointments.Count == 0)
+            {
+                MessageBox.Show($"У вас нет дисциплин. Обратитесть к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DGridDisciplines.IsEnabled = false;
+                TbSearch.IsEnabled = false;
+            }
         }
 
         /// <summary>
@@ -26,16 +34,10 @@ namespace SubsystemKKEP.AppPages.Teacher
         {
             var appointments = App.DataBase.Appointments.
                 Where(p => p.User.Id == InterfaceManagement.ManagementUser.Id && p.Group.IsArchive == false).ToList();
-            if (appointments.Count == 0)
-            {
-                MessageBox.Show($"У вас нет дисциплин. Обратитесть к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-                DGridDisciplines.IsEnabled = false;
-                TbSearch.IsEnabled = false;
-                return;
-            }
 
             appointments = appointments.Where(p => p.Group.GroupName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
-            if (appointments.Count() > 0)
+
+            if (appointments.Count > 0)
             {
                 PopupSearch.Visibility = Visibility.Collapsed;
             }
@@ -53,11 +55,7 @@ namespace SubsystemKKEP.AppPages.Teacher
         /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var disciplines = App.DataBase.Appointments.Where(p => p.User.Id == InterfaceManagement.ManagementUser.Id).ToList();
-
-            disciplines = disciplines.Where(p => p.Group.GroupName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
-
-            DGridDisciplines.ItemsSource = disciplines;
+            UpdateJournals();
         }
 
         /// <summary>

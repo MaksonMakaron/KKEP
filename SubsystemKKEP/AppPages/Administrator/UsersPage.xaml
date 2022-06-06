@@ -76,7 +76,7 @@
                                     BorderBrush="#FFABADB3"
                                     CornerRadius="5"
                                     Padding="3,1"
-                                    Width="380"
+                                    Width="370"
                                     Margin="10"
                                     ToolTip="Поиск по ФИО пользователя">
                                 <StackPanel Orientation="Horizontal"
@@ -87,7 +87,7 @@
                                              TabIndex="13"
                                              MaxLength="30"
                                              HorizontalContentAlignment="Left"
-                                             Width="340"
+                                             Width="330"
                                              TextChanged="TbSearch_TextChanged">
                                     </TextBox>
                                     <Image Source="/SubsystemKKEP;component/Resources/Search.png"

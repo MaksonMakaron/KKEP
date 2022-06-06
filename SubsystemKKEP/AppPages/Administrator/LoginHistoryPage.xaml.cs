@@ -53,7 +53,14 @@ namespace SubsystemKKEP.AppPages.Administrator
             }
 
             history = history.Where(p => p.User.UserName.ToLower().Contains(TbSearch.Text.ToLower())).ToList();
-
+            if (history.Count() > 0)
+            {
+                PopupSearch.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PopupSearch.Visibility = Visibility.Visible;
+            }
             DGridLoginsHistory.ItemsSource = history.OrderByDescending(p => p.DateLogIn);
         }
 
