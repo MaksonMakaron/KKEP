@@ -21,8 +21,15 @@ namespace SubsystemKKEP.AppPages.Department
     /// </summary>
     public partial class CurrentJournalPage : Page
     {
+        /// <summary>
+        /// Текущая группа
+        /// </summary>
         private Group currentGroup = new Group();
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="group">конкретная группа</param>
         public CurrentJournalPage(Group group)
         {
             InitializeComponent();
@@ -33,6 +40,9 @@ namespace SubsystemKKEP.AppPages.Department
             
         }
 
+        /// <summary>
+        /// Обновление списка оценок
+        /// </summary>
         private void UpdateMarks()
         {
             if (CmbDiscipline.SelectedIndex < 1)
@@ -62,26 +72,51 @@ namespace SubsystemKKEP.AppPages.Department
             }
         }
 
+        /// <summary>
+        /// При изменении выбранной дисциплины - отображение оценок по этой дисциплины
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void CmbDiscipline_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateMarks();
         }
 
+        /// <summary>
+        /// При нажатии на кнопку - переход на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        /// <summary>
+        /// При изменении выбранного студента - сортировка по этому студенту
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void CmbSortStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateMarks();
         }
 
+        /// <summary>
+        /// При изменении выбранной даты - сортировка по этой дате
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void DpDateMarkSorting_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateMarks();
         }
 
+        /// <summary>
+        /// При изменении видимости страницы - обновление данных
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible && InterfaceManagement.ManagementUser != null)

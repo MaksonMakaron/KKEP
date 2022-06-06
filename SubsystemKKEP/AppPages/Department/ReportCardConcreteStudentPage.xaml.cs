@@ -22,9 +22,9 @@ namespace SubsystemKKEP.AppPages.Department
     public partial class ReportCardConcreteStudentPage : Page
     {
         /// <summary>
-        /// 
+        /// Загрузка страницы
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="student">выбранный студент</param>
         public ReportCardConcreteStudentPage(Student student)
         {
             InitializeComponent();
@@ -33,9 +33,9 @@ namespace SubsystemKKEP.AppPages.Department
         }
 
         /// <summary>
-        /// 
+        /// Загрузка ведомости в DataGrid
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="student">текущий студент</param>
         private void ReportCardStudent(Student student)
         {
             var marks = App.DataBase.Marks.Where(p => p.IdStudent == student.Id).
@@ -63,10 +63,10 @@ namespace SubsystemKKEP.AppPages.Department
         }
 
         /// <summary>
-        /// 
+        /// При нажатии на кнопку - переход на предыдущую страницу
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
