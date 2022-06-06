@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 using Word = Microsoft.Office.Interop.Word;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SubsystemKKEP.AppPages.Department
 {
@@ -13,8 +14,15 @@ namespace SubsystemKKEP.AppPages.Department
     /// </summary>
     public partial class ReportCardPage : Page
     {
+        /// <summary>
+        /// Текущая группа
+        /// </summary>
         private Group currentGroup = new Group();
 
+        /// <summary>
+        /// Загрузка страницы
+        /// </summary>
+        /// <param name="group">конекретная группа</param>
         public ReportCardPage(Group group)
         {
             InitializeComponent();
@@ -32,16 +40,38 @@ namespace SubsystemKKEP.AppPages.Department
             DGridGroups.ItemsSource = currentGroup.Students.ToList();
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - переход на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             InterfaceManagement.ManagementPage.GoBack();
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - переход на страницу с графиками
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAnalis_Click(object sender, RoutedEventArgs e)
         {
-
+            if (GetData.IsCountDisciplinesNotNull(currentGroup))
+            {
+                InterfaceManagement.ManagementPage.Navigate(new ChartsAcademicPage(currentGroup));
+            }
+            else
+            {
+                MessageBox.Show("Отсутствуют дисциплины у группы. Обратитесь к администратору", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - экспорт в PDF
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnPDF_Click(object sender, RoutedEventArgs e)
         {
             if (GetData.IsCountDisciplinesNotNull(currentGroup))
@@ -54,6 +84,11 @@ namespace SubsystemKKEP.AppPages.Department
             }
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - экспорт в Word
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnWord_Click(object sender, RoutedEventArgs e)
         {
             if (GetData.IsCountDisciplinesNotNull(currentGroup))
@@ -66,6 +101,11 @@ namespace SubsystemKKEP.AppPages.Department
             }
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - экспорт в Excel
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnExcel_Click(object sender, RoutedEventArgs e)
         {
             if (GetData.IsCountDisciplinesNotNull(currentGroup))
@@ -78,6 +118,11 @@ namespace SubsystemKKEP.AppPages.Department
             }
         }
 
+        /// <summary>
+        /// По нажатию на кнопку - открытие страницы со средними оценками студента
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
         private void BtnOpenReportCard_Click(object sender, RoutedEventArgs e)
         {
             if (GetData.IsCountDisciplinesNotNull(currentGroup))
@@ -90,9 +135,71 @@ namespace SubsystemKKEP.AppPages.Department
             }
         }
 
+        /// <summary>
+        /// Экспорт в Excel
+        /// </summary>
         private void ExportExcel()
         {
+            var application = new Excel.Application();
+            application.SheetsInNewWorkbook = 1;
+            Excel.Workbook workbook = application.Workbooks.Add(Type.Missing);
 
+            Excel.Worksheet worksheet = application.Worksheets.Item[1];
+            worksheet.Name = currentGroup.GroupName;
+            worksheet.Cells[1][1] = $"Сведения об успеваемости группы: {currentGroup.GroupName} на {DateTime.Now.Date.ToString("D")}";
+            worksheet.Cells[2][1] = "№ п/п";
+            worksheet.Cells[3][1] = "Фамилия И.О.";
+
+            Excel.Range textRange = worksheet.Range[worksheet.Cells[4][2], worksheet.Cells[20][100]];
+            textRange.HorizontalAlignment = HorizontalAlignment.Center;
+            textRange.VerticalAlignment = VerticalAlignment.Center;
+            
+            Excel.Range allTextRange = worksheet.Range[worksheet.Cells[1][1], worksheet.Cells[100][100]];
+            allTextRange.Font.Name = "Times New Roman";
+
+            Excel.Range disciplineRange = worksheet.Range[worksheet.Cells[4][1], worksheet.Cells[20][1]];
+            disciplineRange.Orientation = 90;
+            disciplineRange.HorizontalAlignment = HorizontalAlignment.Center;
+            disciplineRange.VerticalAlignment = VerticalAlignment.Center;
+
+            var currentDisciplines = GetData.GetAppointments(currentGroup);
+            var students = currentGroup.Students.ToList();
+            var allMarks = App.DataBase.Marks.Where(p => p.Student.IdGroup == currentGroup.Id).ToList();
+
+            for (int j = 0; j < students.Count; j++)
+            {
+                var student = students[j];
+                worksheet.Cells[2][j + 2] = j + 1;
+                worksheet.Cells[3][j + 2] = student.ShortName.ToString();
+                
+                for (int i = 0; i < currentDisciplines.Count; i++)
+                {
+                    var curDis = currentDisciplines[i].Discipline;
+                    worksheet.Cells[i + 4][1] = curDis.DisciplineName;
+                    if (App.DataBase.Marks.Where(p => p.IdStudent == student.Id && p.Discipline.DisciplineName == curDis.DisciplineName).Count() > 0)
+                    {
+                        double avg = App.DataBase.Marks.Where(p => p.IdStudent == student.Id && p.Discipline.DisciplineName == curDis.DisciplineName).Average(p => p.MarkValue);
+                        worksheet.Cells[i + 4][j + 2] = Math.Round(avg).ToString();
+                    }
+                    else
+                    {
+                        worksheet.Cells[i + 4][j + 2] = "н/а";
+                    }
+                }
+
+            }
+
+            Excel.Range bordersRange = worksheet.Range[worksheet.Cells[2][1], worksheet.Cells[currentDisciplines.Count + 3][students.Count + 1]];
+            bordersRange.Borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle =
+            bordersRange.Borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle =
+            bordersRange.Borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle =
+            bordersRange.Borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle =
+            bordersRange.Borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle =
+            bordersRange.Borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlContinuous;
+
+            worksheet.Columns.AutoFit();
+            worksheet.Rows.AutoFit();
+            application.Visible = true;
         }
 
         /// <summary>

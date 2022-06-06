@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SubsystemKKEP.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace SubsystemKKEP.AppPages.Department
     /// </summary>
     public partial class ChartsAcademicPage : Page
     {
-        public ChartsAcademicPage()
+        public ChartsAcademicPage(Group group)
         {
             InitializeComponent();
         }
