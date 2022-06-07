@@ -94,7 +94,7 @@
           <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="varchar" MaxLength="50" />
-          <Property Name="IdGroup" Type="int" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -275,7 +275,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Group">
-          <End Role="Group" Type="Self.Group" Multiplicity="0..1">
+          <End Role="Group" Type="Self.Group" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -485,7 +485,7 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdGroup" Type="Int32" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Group" Relationship="Self.FK_Student_Group" FromRole="Student" ToRole="Group" />
           <NavigationProperty Name="Marks" Relationship="Self.FK_Mark_Student" FromRole="Student" ToRole="Mark" />
         </EntityType>
@@ -633,7 +633,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Group">
-          <End Role="Group" Type="Self.Group" Multiplicity="0..1">
+          <End Role="Group" Type="Self.Group" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Student" Type="Self.Student" Multiplicity="*" />

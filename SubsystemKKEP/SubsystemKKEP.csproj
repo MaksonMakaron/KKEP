@@ -423,16 +423,6 @@
     <Resource Include="Resources\Word.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Classes\BaseModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Classes\BaseModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-      <LastGenOutput>BaseModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\Time.png" />
   </ItemGroup>
   <ItemGroup>
@@ -475,6 +465,18 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Classes\BaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Classes\BaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

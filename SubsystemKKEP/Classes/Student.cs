@@ -24,7 +24,7 @@ namespace SubsystemKKEP.Classes
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Patronymic { get; set; }
-        public Nullable<int> IdGroup { get; set; }
+        public int IdGroup { get; set; }
     
         public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
