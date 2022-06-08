@@ -316,6 +316,18 @@ namespace SubsystemKKEP.AppPages.Department
                     if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         document.SaveAs(sfd.FileName);
+                        if (MessageBox.Show("Вывести документ на печать?", "Печать", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            application.Visible = true;
+                            Word.Dialog printDialog = application.Dialogs[Word.WdWordDialog.wdDialogFilePrint];
+                            if (printDialog.Show() == 1)
+                            {
+                                document.PrintOut();
+                            }
+                            document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
+                            application.Quit();
+                            return;
+                        }
                         MessageBox.Show("Ведомость сформирована", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
