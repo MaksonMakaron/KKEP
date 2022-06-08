@@ -58,6 +58,10 @@ namespace SubsystemKKEP.AppPages.Administrator
             {
                 errors.AppendLine("Введите имя");
             }
+            if (CmbGroup.SelectedIndex == -1)
+            {
+                errors.AppendLine("Выберите группуи");
+            }
 
             if (errors.Length > 0)
             {

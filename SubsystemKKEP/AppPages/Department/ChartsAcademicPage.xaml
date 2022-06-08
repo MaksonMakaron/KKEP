@@ -16,12 +16,20 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Background="#D3F2FF"></Grid>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Background="#D3F2FF"
                         Grid.Row="0">
+                <Button x:Name="BtnBack"
+                        TabIndex="2"
+                        Style="{StaticResource BtnTaskBar}"
+                        Click="BtnBack_Click">
+                    <Button.Content>
+                        <Image Source="/SubsystemKKEP;component/Resources/Back.png"
+                               Style="{StaticResource IconButton}"></Image>
+                    </Button.Content>
+                </Button>
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>

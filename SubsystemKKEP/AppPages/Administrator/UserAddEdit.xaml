@@ -141,7 +141,7 @@
                                     <Grid Background="Transparent">
                                         <TextBox x:Name="TbPassword"
                                                  MaxLength="20"
-                                                 Width="{Binding ElementName=PbPassword}"
+                                                 Width="{Binding ElementName=PbPassword, Path=Width}"
                                                  Margin="0"></TextBox>
                                         <PasswordBox x:Name="PbPassword"
                                                      Width="160"

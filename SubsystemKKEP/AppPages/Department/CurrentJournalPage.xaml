@@ -98,6 +98,7 @@
                     </StackPanel>
                     <DataGrid x:Name="DGridMarks"
                                   MinHeight="400"
+                                  MaxHeight="400"
                                   Grid.Column="1"
                                   Margin="15 0"
                                   VerticalAlignment="Stretch"

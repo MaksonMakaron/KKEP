@@ -88,6 +88,7 @@ namespace SubsystemKKEP.AppPages
                 TbNewPassword.Text = "";
                 TbOldPassword.Text = "";
                 MessageBox.Show("Пароль успешно изменен", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                InterfaceManagement.ManagementPage.GoBack();
             }
             else
             {
@@ -108,7 +109,7 @@ namespace SubsystemKKEP.AppPages
                 }
                 if (passwordCheck == false && !string.IsNullOrWhiteSpace(oldPassword))
                 {
-                    errors += "Неверный старый пароль";
+                    errors += "Введённый пароль не совпадает со старым";
                 }
                 MessageBox.Show($"{errors}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }

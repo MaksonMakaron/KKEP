@@ -73,7 +73,7 @@
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Center"
                         Grid.Row="1">
-                
+
                 <TextBlock Margin="0 20"
                            x:Name="TextGroup"
                            HorizontalAlignment="Center"
@@ -112,5 +112,4 @@
             </StackPanel>
         </Grid>
     </Border>
-
 </Page>

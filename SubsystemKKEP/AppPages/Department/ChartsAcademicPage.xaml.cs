@@ -121,5 +121,15 @@ namespace SubsystemKKEP.AppPages.Department
                 "Под категорию удов. попадают студенты, которые имеют по одному из предметов среднюю оценку 3\n" +
                 "Под категорию неудов. попадают студенты, которые имеют по одному из предметов среднюю оценку 2 или н/а\n", "Справка", MessageBoxButton.OK, MessageBoxImage.Question);
         }
+
+        /// <summary>
+        /// При нажатии на кнопку - переход на предыдущую страницу
+        /// </summary>
+        /// <param name="sender">предоставляет ссылку на объект, который вызвал событие</param>
+        /// <param name="e">передает объект, относящийся к обрабатываемому событию</param>
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            InterfaceManagement.ManagementPage.GoBack();
+        }
     }
 }

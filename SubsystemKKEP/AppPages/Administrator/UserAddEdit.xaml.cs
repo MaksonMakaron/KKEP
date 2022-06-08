@@ -107,6 +107,10 @@ namespace SubsystemKKEP.AppPages.Administrator
                 {
                     errors += "Выберите роль пользователя\n";
                 }
+                if (string.IsNullOrEmpty(TbLogin.Text))
+                {
+                    errors += "Введите логин";
+                }
                 
                 MessageBox.Show($"{errors}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
