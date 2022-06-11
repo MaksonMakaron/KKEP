@@ -110,6 +110,7 @@ namespace SubsystemKKEP.AppPages.Teacher
                     App.DataBase.SaveChanges();
                     MessageBox.Show($"Информация удалена", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                     UpdateMarks();
+                    Reset();
                 }
                 catch (Exception ex)
                 {

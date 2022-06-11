@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SubsystemKKEP.AppWindows"
         Height="800" MinHeight="800"
-        Width="1400" MinWidth="1400"
+        Width="1475" MinWidth="1475"
         WindowState="Maximized" 
         WindowStartupLocation="CenterScreen"
         Title="Администратор. Личный кабинет">
