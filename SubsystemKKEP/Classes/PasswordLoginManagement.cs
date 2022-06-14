@@ -33,12 +33,15 @@ namespace SubsystemKKEP.Classes
                     switch (users[i].Role.RoleName)
                     {
                         case "Администратор":
+                            RecordLogIn(users[i]);
                             OpenAdministratorWindow(users[i]);
                             break;
                         case "Преподаватель":
+                            RecordLogIn(users[i]);
                             OpenTeacherWindow(users[i]);
                             break;
                         case "Отделение":
+                            RecordLogIn(users[i]);
                             OpenDepartmentWindow(users[i]);
                             break;
                         default:
@@ -58,7 +61,6 @@ namespace SubsystemKKEP.Classes
         private static void OpenAdministratorWindow(User сoncreteUser)
         {
             InterfaceManagement.ManagementUser = сoncreteUser;
-            RecordLogIn(сoncreteUser);
             AdministratorWindow administratorWindow = new AdministratorWindow();
             administratorWindow.Show();
             InterfaceManagement.ManagementWindow = administratorWindow;
@@ -72,7 +74,6 @@ namespace SubsystemKKEP.Classes
         private static void OpenTeacherWindow(User сoncreteUser)
         {
             InterfaceManagement.ManagementUser = сoncreteUser;
-            RecordLogIn(сoncreteUser);
             TeacherWindow teacherWindow = new TeacherWindow();
             teacherWindow.Show();
             InterfaceManagement.ManagementWindow = teacherWindow;
@@ -86,12 +87,10 @@ namespace SubsystemKKEP.Classes
         private static void OpenDepartmentWindow(User сoncreteUser)
         {
             InterfaceManagement.ManagementUser = сoncreteUser;
-            RecordLogIn(сoncreteUser);
             DepartmentWindow departmentWindow = new DepartmentWindow();
             departmentWindow.Show();
             InterfaceManagement.ManagementWindow = departmentWindow;
             InterfaceManagement.ManagementWindow.Title = $"Отделение. {InterfaceManagement.ManagementUser.UserName}";
-            RecordLogIn(сoncreteUser);
         }
 
         /// <summary>

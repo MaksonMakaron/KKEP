@@ -69,6 +69,14 @@ namespace SubsystemKKEP.AppPages.Administrator
                     {
                         currentUser.Password = PasswordLoginManagement.CreateSHA512(PbPassword.Password);
                         App.DataBase.Users.Add(currentUser);
+                        if (currentUser.Role.RoleName == "Отделение")
+                        {
+                            App.DataBase.Departments.Add(new Classes.Department
+                            {
+                                DepartmentName = currentUser.UserName,
+                                IdUser = currentUser.Id
+                            });
+                        }
                     }
                     else
                     {
